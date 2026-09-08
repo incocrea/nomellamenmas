@@ -5,6 +5,12 @@
    ========================================================================== */
 * { box-sizing: border-box; }
 
+/* IMPRESCINDIBLE. El navegador oculta [hidden] con «display:none», pero
+   cualquier regla de autor que fije «display» le gana. `.entrada` usa
+   «display:grid», así que al entrar la pantalla de acceso NO se ocultaba y el
+   panel quedaba debajo del pliegue: parecía que el botón no hacía nada. */
+[hidden] { display: none !important; }
+
 body {
   margin: 0;
   background: var(--papel);
@@ -162,7 +168,6 @@ p { margin: 0; }
 .pastilla--riesgo { background: var(--rojo-tinte); color: var(--rojo-oscuro); margin-left: 6px; }
 
 .paginacion { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: var(--e-4); }
-.paginacion[hidden] { display: none; }
 
 /* --- Detalle ------------------------------------------------------------------- */
 .detalle {
