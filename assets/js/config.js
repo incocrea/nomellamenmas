@@ -16,7 +16,7 @@ window.NMM.config = {
   turnstileSiteKey: '0x4AAAAAAEsIuXXtNbj6R6rH',
 
   /* Versión del texto de autorización que acepta la persona (docs/03). */
-  versionPolitica: '2026-09-b1',
+  versionPolitica: '2026-09',
 
   /* Dirección que se comparte desde la pantalla de confirmación. */
   urlCanonica: 'https://nomellamenmas.com/'
