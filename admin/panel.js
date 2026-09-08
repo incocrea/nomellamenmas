@@ -109,6 +109,7 @@
     $('quien').textContent = correo;
     cargarCifras();
     cargarCasos();
+    cargarCorreos();
   }
 
   $('form-entrar').addEventListener('submit', async (ev) => {
@@ -413,6 +414,136 @@
   }
 
   $('d-cerrar').addEventListener('click', () => detalle.close());
+
+  /* ---------- correos que no salieron ----------------------------------------------
+     El cupo diario de Resend es de 100 correos. Cuando se agota, el caso se
+     guarda igual y aquí quedan los que hay que reintentar cuando se reponga. */
+  const MOTIVOS = {
+    limite: 'Cupo de envíos agotado',
+    error: 'Error al enviar',
+    sin_configurar: 'Envío sin configurar',
+    pendiente: 'Todavía sin intentar',
+  };
+  let correosPendientes = [];
+
+  function seleccionados() {
+    return Array.from(document.querySelectorAll('#correos-filas input:checked')).map((i) => i.value);
+  }
+
+  function refrescarBotonReenviar() {
+    const n = seleccionados().length;
+    $('correos-reenviar').disabled = n === 0;
+    $('correos-reenviar').textContent = n ? 'Reintentar (' + n + ')' : 'Reintentar';
+  }
+
+  function pintarCorreos(datos) {
+    correosPendientes = datos.pendientes || [];
+    const seccion = $('seccion-correos');
+    seccion.hidden = correosPendientes.length === 0;
+    if (!correosPendientes.length) { return; }
+
+    $('correos-conteo').textContent = '· ' + correosPendientes.length;
+    const partes = [];
+    if (datos.por_limite) { partes.push(datos.por_limite + ' por cupo agotado'); }
+    if (datos.por_error) { partes.push(datos.por_error + ' por error'); }
+    if (datos.sin_intentar) { partes.push(datos.sin_intentar + ' sin intentar'); }
+    $('correos-nota').textContent = partes.join(' · ') +
+      '. El reintento manda el mismo correo con los datos actuales del caso.';
+
+    const cuerpo = $('correos-filas');
+    cuerpo.replaceChildren();
+    correosPendientes.forEach((c) => {
+      const tr = document.createElement('tr');
+
+      const tdSel = document.createElement('td');
+      const caja = document.createElement('input');
+      caja.type = 'checkbox';
+      caja.value = c.codigo;
+      caja.setAttribute('aria-label', 'Seleccionar ' + c.codigo);
+      caja.addEventListener('change', refrescarBotonReenviar);
+      tdSel.appendChild(caja);
+      tr.appendChild(tdSel);
+
+      const tdCod = document.createElement('td');
+      tdCod.className = 'codigo-celda';
+      tdCod.textContent = c.codigo;
+      tr.appendChild(tdCod);
+
+      const tdFecha = document.createElement('td');
+      tdFecha.className = 'num';
+      tdFecha.textContent = c.creado_en;
+      tr.appendChild(tdFecha);
+
+      tr.appendChild(celda(c.nombre || '(sin nombre)', c.correo || ''));
+
+      const tdMotivo = document.createElement('td');
+      const past = document.createElement('span');
+      past.className = 'pastilla pastilla--' + (c.estado === 'limite' ? 'en_revision' : 'archivado');
+      past.textContent = MOTIVOS[c.estado] || c.estado;
+      tdMotivo.appendChild(past);
+      if (c.detalle) {
+        const d = document.createElement('span');
+        d.className = 'motivo';
+        d.textContent = c.detalle;
+        tdMotivo.appendChild(d);
+      }
+      tr.appendChild(tdMotivo);
+
+      const tdInt = document.createElement('td');
+      tdInt.className = 'num';
+      tdInt.textContent = String(c.intentos) + (c.ultimo ? ' · ' + c.ultimo : '');
+      tr.appendChild(tdInt);
+
+      cuerpo.appendChild(tr);
+    });
+    refrescarBotonReenviar();
+  }
+
+  async function cargarCorreos() {
+    try {
+      pintarCorreos(await conSesion({ accion: 'correos' }));
+    } catch (e) {
+      if (e && e.tipo === 'sesion') { olvidarSesion(); return; }
+      $('correos-error').textContent = mensaje(e);
+      $('correos-error').hidden = false;
+    }
+  }
+
+  $('correos-todos').addEventListener('click', () => {
+    const cajas = Array.from(document.querySelectorAll('#correos-filas input[type=checkbox]'));
+    const marcar = cajas.some((c) => !c.checked);
+    cajas.forEach((c) => { c.checked = marcar; });
+    refrescarBotonReenviar();
+  });
+
+  $('correos-reenviar').addEventListener('click', async () => {
+    const codigos = seleccionados();
+    if (!codigos.length) { return; }
+    const boton = $('correos-reenviar');
+    boton.disabled = true;
+    boton.textContent = 'Reintentando…';
+    $('correos-error').hidden = true;
+    $('correos-exito').hidden = true;
+    try {
+      const r = await conSesion({ accion: 'reenviar', codigos: codigos });
+      const enviados = r.enviados || 0;
+      let texto = enviados + ' de ' + codigos.length + ' enviados.';
+      if (r.detenido_por_limite) {
+        texto += ' Nos detuvimos porque el cupo de envíos volvió a agotarse; vuelve a intentarlo mañana.';
+      }
+      $('correos-exito').textContent = texto;
+      $('correos-exito').hidden = false;
+      await cargarCorreos();
+      cargarCifras();
+    } catch (e) {
+      if (e && e.tipo === 'sesion') { olvidarSesion(); return; }
+      $('correos-error').textContent = mensaje(e);
+      $('correos-error').hidden = false;
+    } finally {
+      boton.disabled = false;
+      refrescarBotonReenviar();
+    }
+  });
 
   /* ---------- exportar ------------------------------------------------------------ */
   function aCsv(filas) {

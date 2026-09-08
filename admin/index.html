@@ -12,8 +12,8 @@
   <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/css/fuentes.css?v=e348fbdd">
   <link rel="stylesheet" href="../assets/css/tokens.css?v=113a1bf0">
-  <link rel="stylesheet" href="panel.css?v=d3181141">
-  <script src="panel.js?v=29e4adc0" defer></script>
+  <link rel="stylesheet" href="panel.css?v=6fb56db4">
+  <script src="panel.js?v=166b645f" defer></script>
 </head>
 <body>
 
@@ -81,6 +81,35 @@
           <h3>Por departamento</h3>
           <div class="barras" id="por-departamento"></div>
         </div>
+      </div>
+    </section>
+
+    <!-- Correos que no salieron -->
+    <section aria-labelledby="t-correos" id="seccion-correos" hidden>
+      <div class="cabeza-casos">
+        <h2 class="titulo-seccion" id="t-correos">Correos sin enviar <span class="conteo" id="correos-conteo"></span></h2>
+        <div class="acciones-correos">
+          <button type="button" class="boton boton--fantasma" id="correos-todos">Seleccionar todos</button>
+          <button type="button" class="boton boton--principal boton--compacto" id="correos-reenviar" disabled>Reintentar</button>
+        </div>
+      </div>
+      <p class="apunte" id="correos-nota"></p>
+      <p class="aviso aviso--error" id="correos-error" role="alert" hidden></p>
+      <p class="aviso aviso--exito" id="correos-exito" role="status" hidden></p>
+      <div class="tabla-envoltura">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th scope="col"><span class="visualmente-oculto">Seleccionar</span></th>
+              <th scope="col">Código</th>
+              <th scope="col">Registrado</th>
+              <th scope="col">Persona</th>
+              <th scope="col">Motivo</th>
+              <th scope="col">Intentos</th>
+            </tr>
+          </thead>
+          <tbody id="correos-filas"></tbody>
+        </table>
       </div>
     </section>
 

@@ -490,6 +490,9 @@
       document.getElementById('codigo-caso').textContent = r.codigo;
       document.getElementById('aviso-local').hidden = !r.modoLocal;
       document.getElementById('aviso-correo').hidden = !r.correoEnviado;
+      // Si el correo no salió, hay que decirlo: si no, la persona cierra la
+      // ventana esperando un mensaje que nunca va a llegar
+      document.getElementById('aviso-sin-correo').hidden = Boolean(r.modoLocal) || r.correoEnviado !== false;
       form.reset();
       refrescarCondicionales();
       actualizarContadores();

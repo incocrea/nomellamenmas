@@ -202,3 +202,12 @@ p { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+/* --- Correos sin enviar ---------------------------------------------------- */
+.acciones-correos { display: flex; gap: 8px; flex-wrap: wrap; }
+.boton--compacto { min-height: 40px; }
+#correos-filas td:first-child { width: 2.5rem; }
+#correos-filas input[type="checkbox"] {
+  width: 20px; height: 20px; accent-color: var(--rojo); cursor: pointer;
+}
+.motivo { display: inline-block; max-width: 22rem; color: var(--tinta-suave); font-size: 0.8rem; }
