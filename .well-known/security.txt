@@ -1,5 +1,5 @@
 # Contacto para reportar problemas de seguridad de nomellamenmas.com (RFC 9116)
-Contact: mailto:hola@nomellamenmas.com
+Contact: mailto:contacto@nomellamenmas.com
 Expires: 2027-09-07T00:00:00.000Z
 Preferred-Languages: es, en
 Canonical: https://nomellamenmas.com/.well-known/security.txt
