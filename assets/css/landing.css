@@ -186,6 +186,10 @@
   padding-top: var(--e-5);
   border-top: 4px solid var(--rojo);
   color: var(--rojo);
+  /* Es una llamada directa a quien lee, no un titular más: cursiva, entre
+     comillas y cinco píxeles menos que las frases que la preceden. */
+  font-style: italic;
+  font-size: calc(var(--t-frase) - 5px);
 }
 
 /* --- No solo nos quejamos -------------------------------------------------- */
