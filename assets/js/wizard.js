@@ -39,7 +39,7 @@
   const PASO_FINAL = '5';
   const CLAVE_BORRADOR = 'nmm-borrador-v3';
   const CAMPOS_BORRADOR = ['canal', 'frecuencia', 'ultima_vez', 'franja', 'sector', 'empresa', 'proposito',
-    'autorizacion', 'era_cliente', 'pidio_cese', 'continuaron'];
+    'autorizacion', 'era_cliente', 'pidio_cese', 'continuaron', 'relato'];
   const CORREO_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const MSJ_TURNSTILE_CAIDO = 'No pudimos cargar la verificación de seguridad. Puede que una extensión del navegador la esté bloqueando: desactívala para este sitio o prueba con otro navegador.';
   const reduceMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -60,6 +60,9 @@
   const valoresCasillas = (n) => qa(`input[name="${n}"]:checked`).map((e) => e.value);
   const sinRespuesta = (n) => valoresCasillas(n).length === 0;
   const valorTexto = (n) => { const e = q(`[name="${n}"]`); return e ? e.value.trim() : ''; };
+  // Lo usa recogerBorrador() para las tres preguntas de opción única. Faltaba, y
+  // como guardarBorrador() se traga los errores, el borrador no se guardaba nunca.
+  const valorRadio = (n) => { const e = q(`input[name="${n}"]:checked`); return e ? e.value : ''; };
   const campoDe = (n) => q(`[data-campo="${n}"]`);
   const esNumero = (p) => /^\d$/.test(String(p));
 
@@ -170,8 +173,9 @@
     if (p === PASO_FINAL) { prepararTurnstile(); }
     if (p === '1' && !inicio) { inicio = Date.now(); }
 
-    // Confirmar antes de cerrar solo mientras hay respuestas en juego
-    dialogo.dataset.confirmarCierre = (esNumero(p) && !enviado) ? '1' : '0';
+    // Cerrar no pregunta nada: los pasos 1 a 4 se guardan solos en la sesión,
+    // así que no hay nada que confirmar. El paso 5 nunca se guarda en el
+    // dispositivo, y eso es a propósito: son datos personales.
 
     cuerpo.scrollTop = 0;
     if (!opciones.sinFoco) {
@@ -610,6 +614,7 @@
 
   form.addEventListener('input', (e) => {
     if (e.target.matches('[data-contador]')) { actualizarContadores(); }
+    if (esNumero(actual) && Number(actual) <= ULTIMO_PASO_CON_BORRADOR) { guardarBorrador(); }
   });
 
   actualizarContadores();

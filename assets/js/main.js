@@ -132,43 +132,4 @@
     }
   }
 
-  /* ---------- Instagram --------------------------------------------------------
-     Instagram no publica ningún enlace de compartir: no hay equivalente a wa.me
-     ni a intent/tweet. En el teléfono sirve el menú del sistema, donde Instagram
-     sí aparece como destino. En escritorio ese menú existe en Windows pero
-     Instagram no está en él, así que abrirlo parece un botón roto: ahí se copia
-     el enlace. Si el menú se cancela o falla, también se copia; nunca en silencio. */
-  const igBoton = document.getElementById('cmp-ig');
-  if (igBoton) {
-    const cartel = document.getElementById('cmp-msj');
-    let borrar = null;
-    const decir = (t) => {
-      if (!cartel) { return; }
-      cartel.textContent = t;
-      clearTimeout(borrar);
-      borrar = setTimeout(() => { cartel.textContent = ''; }, 8000);
-    };
-    const enlace = (NMM.config && NMM.config.urlCanonica) || location.origin + '/';
-    const frase = 'En Colombia recibimos llamadas comerciales que nunca pedimos. '
-      + 'NO ME LLAMEN MÁS documenta casos para exigir un cambio real. Registra el tuyo:';
-    const copiar = () => {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(enlace).then(
-          () => decir('Enlace copiado. Abre Instagram y pégalo en tu historia, en un mensaje o en tu perfil.'),
-          () => decir('Copia este enlace y pégalo en Instagram: ' + enlace)
-        );
-        return;
-      }
-      decir('Copia este enlace y pégalo en Instagram: ' + enlace);
-    };
-    const enTelefono = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
-    igBoton.addEventListener('click', () => {
-      if (enTelefono && navigator.share) {
-        navigator.share({ title: 'NO ME LLAMEN MÁS', text: frase, url: enlace })
-          .then(() => decir('Listo. Si elegiste Instagram, pega el enlace donde quieras.'), copiar);
-        return;
-      }
-      copiar();
-    });
-  }
 })();

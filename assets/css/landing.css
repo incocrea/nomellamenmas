@@ -454,6 +454,9 @@ body.modal-abierto .cta-fija { display: none; }
 .compartir {
   position: fixed;
   z-index: 45;              /* por debajo de la CTA fija (50) */
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);          /* el hueco que separa «seguir» de «compartir» */
   right: var(--e-3);
   bottom: calc(var(--e-3) + env(safe-area-inset-bottom));
   opacity: 0;
@@ -470,6 +473,28 @@ body.modal-abierto .cta-fija { display: none; }
   .compartir.compartir--sube { bottom: calc(var(--e-3) + env(safe-area-inset-bottom)); }
 }
 body.modal-abierto .compartir { display: none; }
+
+/* Instagram va aparte y resaltado: no es para compartir, es la invitación a
+   seguir la campaña. En rojo pleno para que se lea como otra cosa, no como un
+   cuarto botón de la fila. */
+.compartir__seguir {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--rojo);
+  color: var(--blanco);
+  border: 2px solid var(--papel);
+  box-shadow: 0 8px 24px rgba(199, 39, 28, 0.34);
+  transition: transform var(--dur-corta) var(--suave), background var(--dur-corta) var(--suave);
+}
+.compartir__seguir svg { width: 22px; height: 22px; fill: currentColor; }
+.compartir__seguir:hover, .compartir__seguir:focus-visible {
+  transform: translateY(-2px);
+  background: var(--rojo-oscuro);
+}
 
 /* La lista es una pastilla con fondo propio. Sin ella, al pasar por encima de
    una sección el grupo parece un choque de maquetación en vez de algo que
@@ -513,27 +538,7 @@ body.modal-abierto .compartir { display: none; }
 .compartir__boton--wa:hover, .compartir__boton--wa:focus-visible { background: #1FA855; }
 .compartir__boton--fb:hover, .compartir__boton--fb:focus-visible { background: #1877F2; }
 .compartir__boton--eq:hover, .compartir__boton--eq:focus-visible { background: #14171A; }
-.compartir__boton--ig:hover, .compartir__boton--ig:focus-visible { background: #C13584; }
 
-/* Aviso de «enlace copiado»: flotante abajo y al centro, encima de todo */
-.compartir__msj {
-  position: fixed;
-  z-index: 60;
-  left: 50%;
-  bottom: calc(var(--e-4) + env(safe-area-inset-bottom));
-  transform: translateX(-50%);
-  max-width: min(90vw, 30rem);
-  margin: 0;
-  padding: var(--e-3) var(--e-4);
-  border-radius: var(--radio-boton);
-  background: var(--tinta);
-  color: var(--papel);
-  font-size: var(--t-chico);
-  text-align: center;
-  text-wrap: pretty;
-  box-shadow: var(--sombra-modal);
-}
-.compartir__msj:empty { display: none; }
 
 /* La columna a media altura solo cuando hay margen de verdad fuera del
    contenedor: 1120 px de contenido + los 66 px que ocupa la columna a cada
@@ -546,6 +551,7 @@ body.modal-abierto .compartir { display: none; }
     bottom: auto;
     transform: translateY(-50%);
   }
+  .compartir,
   .compartir__lista { flex-direction: column; }
 }
 
