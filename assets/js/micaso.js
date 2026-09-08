@@ -219,8 +219,21 @@
     const ubicacion = $('mc-ubicacion').value.trim();
     const i = ubicacion.lastIndexOf(',');
     const telefono = $('mc-telefono').value.trim();
-    if (telefono && !NMM.wizard.normalizarTelefono(telefono)) {
+    // Los tres son obligatorios al registrar, así que tampoco pueden vaciarse aquí
+    if (!$('mc-nombre').value.trim()) {
+      marcar('mc-nombre', 'Escribe tu nombre o el seudónimo que prefieras usar.');
+      return;
+    }
+    if (!telefono) {
+      marcar('mc-telefono', 'Necesitamos el número al que te llaman.');
+      return;
+    }
+    if (!NMM.wizard.normalizarTelefono(telefono)) {
       marcar('mc-telefono', 'Revisa el número: 10 dígitos que empiezan por 3 o por 60.');
+      return;
+    }
+    if (!ubicacion) {
+      marcar('mc-ubicacion', 'Dinos desde qué ciudad nos escribes.');
       return;
     }
     const cambios = {

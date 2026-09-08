@@ -46,7 +46,7 @@
     if (cargaMiCaso) { return cargaMiCaso; }
     cargaMiCaso = new Promise((res) => {
       const s = document.createElement('script');
-      s.src = 'assets/js/micaso.js?v=f6abcd98';
+      s.src = 'assets/js/micaso.js?v=81f5903b';
       s.async = true;
       s.onload = res;
       s.onerror = res;
@@ -102,6 +102,7 @@
   const barra = document.getElementById('cta-fija');
   const hero = document.getElementById('hero');
   const cierre = document.getElementById('registra');
+  const compartir = document.getElementById('barra-compartir');
   if (barra && hero && tieneIO) {
     let heroArriba = false;
     let cierreVisible = false;
@@ -109,6 +110,13 @@
       const visible = heroArriba && !cierreVisible;
       barra.classList.toggle('visible', visible);
       if (visible) { barra.removeAttribute('inert'); } else { barra.setAttribute('inert', ''); }
+      // Compartir sigue disponible tambien sobre el bloque rojo final; solo
+      // se aparta hacia arriba mientras la CTA fija ocupa el borde inferior
+      if (compartir) {
+        compartir.classList.toggle('visible', heroArriba);
+        compartir.classList.toggle('compartir--sube', visible);
+        if (heroArriba) { compartir.removeAttribute('inert'); } else { compartir.setAttribute('inert', ''); }
+      }
     };
     new IntersectionObserver((en) => {
       heroArriba = !en[0].isIntersecting && en[0].boundingClientRect.bottom < 0;
@@ -122,5 +130,37 @@
         // fija se escondía mucho antes de que el botón real entrara en pantalla
       }, { threshold: 0.35 }).observe(cierre);
     }
+  }
+
+  /* ---------- Instagram: copiar el enlace ------------------------------------ */
+  // Instagram no tiene URL de compartir en la web. Lo unico honesto es abrir el
+  // menu del sistema, que si lista Instagram, y si no dejar el enlace copiado.
+  const igBoton = document.getElementById('cmp-ig');
+  if (igBoton) {
+    const cartel = document.getElementById('cmp-msj');
+    let borrar = null;
+    const decir = (t) => {
+      if (!cartel) { return; }
+      cartel.textContent = t;
+      clearTimeout(borrar);
+      borrar = setTimeout(() => { cartel.textContent = ''; }, 7000);
+    };
+    const enlace = (NMM.config && NMM.config.urlCanonica) || location.origin + '/';
+    const frase = 'En Colombia recibimos llamadas comerciales que nunca pedimos. '
+      + 'NO ME LLAMEN MÁS documenta casos para exigir un cambio real. Registra el tuyo:';
+    igBoton.addEventListener('click', () => {
+      if (navigator.share) {
+        navigator.share({ title: 'NO ME LLAMEN MÁS', text: frase, url: enlace }).catch(() => {});
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(enlace).then(
+          () => decir('Enlace copiado. Pégalo en tu historia o en tu perfil de Instagram.'),
+          () => decir('Copia este enlace y pégalo en Instagram: ' + enlace)
+        );
+        return;
+      }
+      decir('Copia este enlace y pégalo en Instagram: ' + enlace);
+    });
   }
 })();

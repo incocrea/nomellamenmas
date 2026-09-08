@@ -429,3 +429,128 @@ body.modal-abierto .cta-fija { display: none; }
 @media (min-width: 768px) {
   .escena--metodo { max-width: 240px; }
 }
+
+/* --- Ilustraciones en pantalla ancha --------------------------------------
+   Las dos secciones de texto pasan a dos columnas: el texto manda y la
+   ilustracion acompana. El titulo y el antetitulo cruzan las dos. */
+@media (min-width: 900px) {
+  #te-ha-pasado > .contenedor,
+  #que-hacemos > .contenedor {
+    display: grid;
+    column-gap: var(--e-8);
+    align-items: center;
+  }
+  #te-ha-pasado > .contenedor { grid-template-columns: minmax(0, 1fr) 300px; }
+  #que-hacemos > .contenedor { grid-template-columns: minmax(0, 1fr) 260px; }
+  #te-ha-pasado .kicker, #te-ha-pasado .seccion__titulo,
+  #que-hacemos .kicker, #que-hacemos .seccion__titulo { grid-column: 1 / -1; }
+  .escena--pasado, .escena--metodo { margin-top: 0; }
+}
+
+/* --- Compartir -------------------------------------------------------------
+   Aparece al dejar atras el hero y sigue disponible hasta el final. No usa
+   [hidden]: la visibilidad va por clase, igual que la CTA fija, para que
+   ninguna regla de «display» pueda ganarle. */
+.compartir {
+  position: fixed;
+  z-index: 45;              /* por debajo de la CTA fija (50) */
+  right: var(--e-3);
+  bottom: calc(var(--e-3) + env(safe-area-inset-bottom));
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-media) var(--suave),
+              bottom var(--dur-media) var(--suave),
+              visibility 0s linear var(--dur-media);
+}
+.compartir.visible { opacity: 1; visibility: visible; transition-delay: 0s; }
+/* Cuando la CTA fija ocupa el borde inferior, los iconos suben para no taparla */
+.compartir.compartir--sube { bottom: calc(88px + env(safe-area-inset-bottom)); }
+@media (min-width: 640px) {
+  /* Desde aquí la CTA fija ya no existe, así que no hay de qué apartarse */
+  .compartir.compartir--sube { bottom: calc(var(--e-3) + env(safe-area-inset-bottom)); }
+}
+body.modal-abierto .compartir { display: none; }
+
+/* La lista es una pastilla con fondo propio. Sin ella, al pasar por encima de
+   una sección el grupo parece un choque de maquetación en vez de algo que
+   flota sobre la página. */
+.compartir__lista {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  display: flex;
+  gap: 4px;
+  border-radius: 999px;
+  background: rgba(242, 243, 241, 0.9);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--linea);
+  box-shadow: 0 8px 24px rgba(27, 29, 33, 0.2);
+}
+
+.compartir__boton {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--tinta);
+  cursor: pointer;
+  transition: transform var(--dur-corta) var(--suave),
+              background var(--dur-corta) var(--suave),
+              color var(--dur-corta) var(--suave);
+}
+.compartir__boton svg { width: 19px; height: 19px; fill: currentColor; }
+
+/* El color de cada red solo aparece al apuntar o al enfocar: en reposo la
+   fila es neutra y no compite con el rojo de la marca */
+.compartir__boton:hover, .compartir__boton:focus-visible {
+  transform: translateY(-2px);
+  color: var(--blanco);
+}
+.compartir__boton--wa:hover, .compartir__boton--wa:focus-visible { background: #1FA855; }
+.compartir__boton--fb:hover, .compartir__boton--fb:focus-visible { background: #1877F2; }
+.compartir__boton--eq:hover, .compartir__boton--eq:focus-visible { background: #14171A; }
+.compartir__boton--ig:hover, .compartir__boton--ig:focus-visible { background: #C13584; }
+
+/* Aviso de «enlace copiado»: flotante abajo y al centro, encima de todo */
+.compartir__msj {
+  position: fixed;
+  z-index: 60;
+  left: 50%;
+  bottom: calc(var(--e-4) + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  max-width: min(90vw, 30rem);
+  margin: 0;
+  padding: var(--e-3) var(--e-4);
+  border-radius: var(--radio-boton);
+  background: var(--tinta);
+  color: var(--papel);
+  font-size: var(--t-chico);
+  text-align: center;
+  text-wrap: pretty;
+  box-shadow: var(--sombra-modal);
+}
+.compartir__msj:empty { display: none; }
+
+/* La columna a media altura solo cuando hay margen de verdad fuera del
+   contenedor: 1120 px de contenido + los 66 px que ocupa la columna a cada
+   lado. Por debajo de eso se quedaría encima del texto. */
+@media (min-width: 1280px) {
+  .compartir,
+  .compartir.compartir--sube {
+    right: var(--e-5);
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+  .compartir__lista { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .compartir { transition: none; }
+  .compartir__boton { transition: none; }
+  .compartir__boton:hover, .compartir__boton:focus-visible { transform: none; }
+}

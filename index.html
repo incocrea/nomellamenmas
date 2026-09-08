@@ -37,9 +37,9 @@
   <link rel="stylesheet" href="assets/css/fuentes.css?v=e348fbdd">
   <link rel="stylesheet" href="assets/css/tokens.css?v=113a1bf0">
   <link rel="stylesheet" href="assets/css/base.css?v=c7fb725d">
-  <link rel="stylesheet" href="assets/css/landing.css?v=70465b1d">
+  <link rel="stylesheet" href="assets/css/landing.css?v=e54c441b">
   <link rel="stylesheet" href="assets/css/modal.css?v=51d300e6">
-  <link rel="stylesheet" href="assets/css/wizard.css?v=701051cf">
+  <link rel="stylesheet" href="assets/css/wizard.css?v=c7788b53">
 
   <script type="application/ld+json">
   {
@@ -56,8 +56,8 @@
   <script src="assets/js/config.js?v=a1d4caf6" defer></script>
   <script src="assets/js/modal.js?v=b44ad8e0" defer></script>
   <script src="assets/js/api.js?v=54b6837c" defer></script>
-  <script src="assets/js/wizard.js?v=90bfdbe5" defer></script>
-  <script src="assets/js/main.js?v=3a9589b5" defer></script>
+  <script src="assets/js/wizard.js?v=8743da94" defer></script>
+  <script src="assets/js/main.js?v=6ef333a6" defer></script>
   <!-- micaso.js no se carga aquí: main.js lo pide la primera vez que alguien
        abre «Mi caso», que es una minoría de las visitas -->
 
@@ -70,7 +70,7 @@
       <a class="marca" href="#" aria-label="NO ME LLAMEN MÁS, inicio">
         <svg class="marca__icono" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
           <circle cx="32" cy="32" r="32" fill="#C7271C"></circle>
-          <path fill="#FFFFFF" transform="translate(8 7.6) scale(2)" d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"></path>
+          <rect x="17" y="9" width="30" height="46" rx="6.5" fill="#FFFFFF"></rect><g fill="none" stroke="#C7271C" stroke-width="4.8" stroke-linecap="round"><path d="M27.2 37V27.4"></path><path d="M32 37V22.8"></path><path d="M36.8 37V24.4"></path><path d="M41.4 37v-8.2"></path><path d="M23.8 41 20.4 33.6"></path></g><rect x="23.9" y="31.6" width="17.8" height="15.8" rx="7.9" fill="#C7271C"></rect>
         </svg>
         <span><b>No</b> me llamen más</span>
       </a>
@@ -111,6 +111,7 @@
           <p class="frase revelar">Dices que no quieres más llamadas, pero aun así vuelven a llamar.</p>
           <p class="frase frase--remate revelar">«Si te identificas y sientes que esto te roba tranquilidad, únete y ayúdanos a combatir esta forma de acoso <span class="frase__enfasis">compartiendo tu caso.</span>»</p>
         </div>
+        <img class="escena escena--pasado revelar" src="assets/img/escena-pasado.png" width="520" height="520" alt="Una persona molesta rechaza con la mano una llamada que entra en su teléfono." loading="lazy" decoding="async">
       </div>
     </section>
 
@@ -120,6 +121,7 @@
         <p class="kicker">El método</p>
         <h2 class="seccion__titulo" id="titulo-hacemos">No solo nos quejaremos</h2>
         <p class="seccion__intro seccion__intro--grande revelar">Ya sabemos que somos miles las personas cansadas de recibir llamadas indeseadas. Por eso documentaremos lo que está ocurriendo, como evidencia para iniciar procesos legales y lograr soluciones reales.</p>
+        <img class="escena escena--metodo revelar" src="assets/img/escena-metodo.png" width="440" height="440" alt="Una carpeta de casos con documentos dentro y una lupa que los examina." loading="lazy" decoding="async">
       </div>
     </section>
 
@@ -185,6 +187,20 @@
   <div class="cta-fija" id="cta-fija" inert>
     <button type="button" class="boton boton--principal" data-abrir-modal="registro">Registra tu caso</button>
   </div>
+
+  <!-- Compartir. En escritorio es una columna a la derecha; en móvil, una fila
+       por encima de la CTA fija. Instagram no ofrece URL de compartir en la web
+       (no hay equivalente a wa.me), así que ese botón abre el menú del sistema
+       cuando existe y, si no, copia el enlace para pegarlo en una historia. -->
+  <div class="compartir" id="barra-compartir" inert>
+    <ul class="compartir__lista" aria-label="Compartir la campaña">
+      <li><a class="compartir__boton compartir__boton--wa" href="https://wa.me/?text=En%20Colombia%20recibimos%20llamadas%20comerciales%20que%20nunca%20pedimos.%20NO%20ME%20LLAMEN%20M%C3%81S%20documenta%20casos%20para%20exigir%20un%20cambio%20real.%20Registra%20el%20tuyo%3A%20https%3A%2F%2Fnomellamenmas.com%2F" target="_blank" rel="noopener nofollow"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.19.3-.76.97-.93 1.16-.18.2-.35.23-.65.08-.29-.15-1.25-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.18-.3-.02-.46.13-.6.14-.14.3-.35.44-.53.15-.17.2-.3.3-.5.1-.19.05-.37-.02-.51-.08-.15-.67-1.62-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.03 1.01-1.03 2.48 0 1.46 1.06 2.87 1.21 3.07.15.2 2.1 3.2 5.08 4.49.7.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.28.18-1.41-.08-.12-.28-.2-.57-.34m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.37l-.36-.22-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.43 9.89-9.88 9.89m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.9 0-3.17-1.24-6.16-3.48-8.41Z"></path></svg><span class="visualmente-oculto">Compartir por WhatsApp</span></a></li>
+      <li><a class="compartir__boton compartir__boton--fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnomellamenmas.com%2F" target="_blank" rel="noopener nofollow"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M24 12.07C24 5.44 18.63.07 12 .07S0 5.44 0 12.07c0 5.99 4.39 10.95 10.13 11.85v-8.38H7.08v-3.47h3.05V9.43c0-3.01 1.79-4.67 4.53-4.67 1.31 0 2.69.24 2.69.24v2.95h-1.51c-1.5 0-1.96.93-1.96 1.87v2.25h3.33l-.53 3.47h-2.8v8.38C19.61 23.02 24 18.06 24 12.07Z"></path></svg><span class="visualmente-oculto">Compartir en Facebook</span></a></li>
+      <li><a class="compartir__boton compartir__boton--eq" href="https://twitter.com/intent/tweet?text=En%20Colombia%20recibimos%20llamadas%20comerciales%20que%20nunca%20pedimos.%20NO%20ME%20LLAMEN%20M%C3%81S%20documenta%20casos%20para%20exigir%20un%20cambio%20real.%20Registra%20el%20tuyo%3A&amp;url=https%3A%2F%2Fnomellamenmas.com%2F" target="_blank" rel="noopener nofollow"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.6l5.24 6.93 6.06-6.93Zm-1.3 19.5h2.04L6.49 3.24H4.3l13.3 17.4Z"></path></svg><span class="visualmente-oculto">Compartir en X</span></a></li>
+      <li><button type="button" class="compartir__boton compartir__boton--ig" id="cmp-ig"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.41.68.81.9 1.38.16.42.36 1.05.41 2.22.06 1.27.07 1.65.07 4.85s-.01 3.59-.07 4.85c-.06 1.17-.26 1.8-.42 2.23a3.72 3.72 0 0 1-.9 1.38c-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.86.07s-3.59-.02-4.86-.08c-1.17-.06-1.82-.25-2.24-.42a3.7 3.7 0 0 1-1.38-.9c-.42-.42-.69-.82-.9-1.38-.17-.42-.36-1.06-.42-2.23-.05-1.26-.06-1.65-.06-4.84 0-3.2.01-3.59.06-4.86.06-1.17.26-1.81.42-2.23.21-.57.48-.96.9-1.38.42-.42.81-.69 1.38-.9.42-.17 1.05-.36 2.22-.42 1.28-.05 1.65-.06 4.86-.06M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.67 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56.79-.3 1.46-.71 2.13-1.38.67-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.79-.71-1.46-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm7.85-10.41a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"></path></svg><span class="visualmente-oculto">Copiar el enlace para compartirlo en Instagram</span></button></li>
+    </ul>
+  </div>
+  <p class="compartir__msj" id="cmp-msj" role="status"></p>
 
   <!-- ============================ MODALES DE TEXTO ============================ -->
 
@@ -285,13 +301,13 @@
         <!-- Política de tratamiento. Cubre los seis numerales del art. 13 del Decreto 1377
              de 2013 y los plazos de los arts. 14 y 15 de la Ley 1581 de 2012. -->
         <h3>1. Quién responde por tus datos</h3>
-        <p><strong>Harold Vélez Solano</strong>, director de la iniciativa ciudadana NO ME LLAMEN MÁS, identificado con cédula de ciudadanía número 10.031.785, con domicilio en Pereira, Risaralda, Colombia.</p>
+        <p><strong>Harold Vélez Solano</strong>, persona natural, director de la iniciativa ciudadana NO ME LLAMEN MÁS, con domicilio en Pereira, Risaralda, Colombia.</p>
         <ul>
-          <li>Dirección: La Rivera, casa 4, Pereira, Risaralda.</li>
           <li>Correo electrónico: contacto@nomellamenmas.com</li>
           <li>Teléfono: +57 300 737 8466</li>
+          <li>Dirección de notificaciones: Pereira, Risaralda, Colombia.</li>
         </ul>
-        <p>La persona encargada de atender peticiones, consultas y reclamos sobre datos personales es el propio director de la iniciativa, a través del correo indicado.</p>
+        <p>La persona encargada de atender peticiones, consultas y reclamos sobre datos personales es el propio director de la iniciativa. El canal habilitado para todos ellos es el correo indicado arriba, que se atiende dentro de los plazos legales. Si necesitas remitir correspondencia física o notificar un acto de autoridad, escribe primero a ese correo y te confirmamos la dirección exacta de notificación.</p>
 
         <h3>2. Qué normas aplican</h3>
         <p>La Ley 1581 de 2012, el Decreto 1377 de 2013 (compilado en el Decreto 1074 de 2015) y las normas que los modifiquen o complementen. Tu número de teléfono, tu correo y tu nombre son datos personales: tienes derechos sobre cómo se usan.</p>
@@ -377,7 +393,7 @@
     <div class="modal__cuerpo">
       <div class="texto">
         <h3>Qué es NO ME LLAMEN MÁS</h3>
-        <p>Una iniciativa ciudadana independiente, dirigida por <strong>Harold Vélez Solano</strong> (cédula de ciudadanía 10.031.785, Pereira, Risaralda), que reúne y documenta casos de llamadas y mensajes comerciales no deseados en Colombia. No es una entidad pública ni una firma de abogados, y registrar un caso no crea una relación de representación legal.</p>
+        <p>Una iniciativa ciudadana independiente, dirigida por <strong>Harold Vélez Solano</strong>, desde Pereira, Risaralda, que reúne y documenta casos de llamadas y mensajes comerciales no deseados en Colombia. No es una entidad pública ni una firma de abogados, y registrar un caso no crea una relación de representación legal.</p>
 
         <h3>Qué haces al registrar un caso</h3>
         <ul>
@@ -521,13 +537,13 @@
         </div>
 
         <div class="campo" data-campo="mc-telefono">
-          <label class="campo__etiqueta" for="mc-telefono">Teléfono al que te llaman <span class="campo__opcional">(opcional)</span></label>
+          <label class="campo__etiqueta" for="mc-telefono">Teléfono al que te llaman</label>
           <input class="entrada" id="mc-telefono" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="310 123 4567">
           <p class="error" id="err-mc-telefono"></p>
         </div>
 
         <div class="campo" data-campo="mc-ubicacion">
-          <label class="campo__etiqueta" for="mc-ubicacion">Ciudad <span class="campo__opcional">(opcional)</span></label>
+          <label class="campo__etiqueta" for="mc-ubicacion">Ciudad</label>
           <input class="entrada" id="mc-ubicacion" type="text" maxlength="90" list="ciudades" autocomplete="address-level2" placeholder="Por ejemplo: Medellín, Antioquia">
           <p class="error" id="err-mc-ubicacion"></p>
         </div>
@@ -758,6 +774,14 @@
               <p class="error" id="err-continuaron"></p>
             </fieldset>
           </div>
+
+          <div class="campo" data-campo="relato">
+            <label class="campo__etiqueta" for="c-relato">¿Quieres contarnos algo más? <span class="campo__opcional">(opcional)</span></label>
+            <p class="campo__pista">En tus palabras: lo que las opciones de antes no alcanzan a decir. No incluyas datos de otras personas.</p>
+            <textarea class="entrada entrada--area" id="c-relato" name="relato" maxlength="500" rows="4" data-contador="c-contador"></textarea>
+            <p class="contador" id="c-contador" aria-hidden="true">0/500</p>
+            <p class="error" id="err-relato"></p>
+          </div>
         </section>
 
         <!-- PASO 5 -->
@@ -766,8 +790,8 @@
           <p class="paso__ayuda">Lo mínimo para poder avisarte. Nada de esto se publica. <button type="button" class="enlace" data-abrir-modal="mis-datos">Qué pasa con mis datos</button></p>
 
           <div class="campo" data-campo="nombre">
-            <label class="campo__etiqueta" for="c-nombre">Nombre o seudónimo <span class="campo__opcional">(opcional)</span></label>
-            <input class="entrada" id="c-nombre" name="nombre" type="text" maxlength="80" autocomplete="name">
+            <label class="campo__etiqueta" for="c-nombre">Nombre o seudónimo</label>
+            <input class="entrada" id="c-nombre" name="nombre" type="text" maxlength="80" autocomplete="name" required>
             <p class="error" id="err-nombre"></p>
           </div>
 
@@ -779,16 +803,16 @@
           </div>
 
           <div class="campo" data-campo="telefono">
-            <label class="campo__etiqueta" for="c-telefono">Teléfono al que te llaman <span class="campo__opcional">(opcional)</span></label>
-            <p class="campo__pista">Nos ayuda a sustentar el caso en acciones futuras. Nunca se publica.</p>
-            <input class="entrada" id="c-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="310 123 4567">
+            <label class="campo__etiqueta" for="c-telefono">Teléfono al que te llaman</label>
+            <p class="campo__pista">Es el dato que sustenta el caso. Nunca se publica.</p>
+            <input class="entrada" id="c-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="310 123 4567" required>
             <p class="error" id="err-telefono"></p>
           </div>
 
           <div class="campo" data-campo="ubicacion">
-            <label class="campo__etiqueta" for="c-ubicacion">Ciudad <span class="campo__opcional">(opcional)</span></label>
+            <label class="campo__etiqueta" for="c-ubicacion">Ciudad</label>
             <p class="campo__pista">Escribe las primeras letras y elígela de la lista. Si la tuya no aparece, escríbela igual.</p>
-            <input class="entrada" id="c-ubicacion" name="ubicacion" type="text" maxlength="90" list="ciudades" autocomplete="address-level2" placeholder="Por ejemplo: Medellín, Antioquia">
+            <input class="entrada" id="c-ubicacion" name="ubicacion" type="text" maxlength="90" list="ciudades" autocomplete="address-level2" placeholder="Por ejemplo: Medellín, Antioquia" required>
             <datalist id="ciudades"></datalist>
             <p class="error" id="err-ubicacion"></p>
           </div>
@@ -820,6 +844,7 @@
 
         <!-- FIN -->
         <section class="paso" data-paso="fin" aria-labelledby="pf-titulo" hidden>
+          <img class="escena escena--fin" src="assets/img/caso-registrado.png" width="260" height="260" alt="" loading="lazy" decoding="async">
           <h3 class="paso__pregunta" id="pf-titulo" tabindex="-1">Tu caso quedó registrado.</h3>
           <p class="paso__ayuda">Gracias por sumarte. Guarda este código: con él y tu correo podrás actualizar tu caso más adelante.</p>
           <p><span class="codigo" id="codigo-caso">NMM-······</span></p>

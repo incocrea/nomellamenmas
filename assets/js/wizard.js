@@ -242,16 +242,21 @@
       case '4':
         if (sinRespuesta('pidio_cese')) { falla('pidio_cese', 'Marca al menos una opción.'); }
         else if (pidioCese() && sinRespuesta('continuaron')) { falla('continuaron', 'Cuéntanos si siguieron llamando.'); }
+        if (valorTexto('relato').length > 500) { falla('relato', 'Máximo 500 caracteres.'); }
         break;
       case '5': {
-        if (valorTexto('nombre').length > 80) { falla('nombre', 'Máximo 80 caracteres.'); }
+        const n = valorTexto('nombre');
+        if (!n) { falla('nombre', 'Escribe tu nombre o el seudónimo que prefieras usar.'); }
+        else if (n.length > 80) { falla('nombre', 'Máximo 80 caracteres.'); }
         const c = valorTexto('correo');
         if (!c) { falla('correo', 'Necesitamos un correo para avisarte y para que puedas actualizar tu caso.'); }
         else if (!CORREO_RE.test(c)) { falla('correo', 'Revisa el formato del correo, por ejemplo nombre@correo.com.'); }
         const t = valorTexto('telefono');
-        if (t && !normalizarTelefono(t)) { falla('telefono', 'Revisa el número: 10 dígitos que empiezan por 3 (celular) o por 60 (fijo).'); }
-        if (valorTexto('ubicacion').length > 90) { falla('ubicacion', 'Máximo 90 caracteres.'); }
-        if (valorTexto('relato').length > 500) { falla('relato', 'Máximo 500 caracteres.'); }
+        if (!t) { falla('telefono', 'Necesitamos el número al que te llaman: es lo que sustenta el caso.'); }
+        else if (!normalizarTelefono(t)) { falla('telefono', 'Revisa el número: 10 dígitos que empiezan por 3 (celular) o por 60 (fijo).'); }
+        const u = valorTexto('ubicacion');
+        if (!u) { falla('ubicacion', 'Dinos desde qué ciudad nos escribes.'); }
+        else if (u.length > 90) { falla('ubicacion', 'Máximo 90 caracteres.'); }
 
         const legales = q('.casillas-legales');
         const faltan = ['acepto_tratamiento', 'acepto_veracidad', 'acepto_mayor'].filter((n) => !q(`input[name="${n}"]`).checked);

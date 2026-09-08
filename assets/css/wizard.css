@@ -341,3 +341,11 @@
 
 #mc-confirmar-borrar p { margin-bottom: var(--e-3); }
 #mc-confirmar-borrar .intro-acciones { margin-top: var(--e-3); }
+
+/* La ilustracion del final: pequena, centrada y sin marco */
+.escena--fin {
+  display: block;
+  width: 116px;
+  height: auto;
+  margin: 0 auto var(--e-4);
+}
