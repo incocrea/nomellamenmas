@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NO ME LLAMEN MÁS — No me llames sin permiso</title>
+  <meta name="description" content="¿Recibes llamadas comerciales que no autorizaste? Registra tu caso. Estamos documentando lo que pasa en Colombia para exigir que decir «no me llames más» sea suficiente.">
+  <!-- QUITAR AL LANZAR: mientras el sitio esté en pruebas no se indexa -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://nomellamenmas.com/">
+  <!-- GitHub Pages no permite cabeceras HTTP: la CSP va por meta. frame-ancestors no aplica aquí. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://*.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <meta name="theme-color" content="#C7271C">
+  <meta name="color-scheme" content="light">
+
+  <!-- Vista previa al compartir (WhatsApp, Facebook, X, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NO ME LLAMEN MÁS">
+  <meta property="og:title" content="NO ME LLAMEN MÁS — No me llames sin permiso">
+  <meta property="og:description" content="¿A ti también te llaman? Registra tu caso y ayuda a demostrar que no son casos aislados.">
+  <meta property="og:url" content="https://nomellamenmas.com/">
+  <meta property="og:image" content="https://nomellamenmas.com/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="NO ME LLAMEN MÁS. No me llames sin permiso.">
+  <meta property="og:locale" content="es_CO">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NO ME LLAMEN MÁS — No me llames sin permiso">
+  <meta name="twitter:description" content="¿A ti también te llaman? Registra tu caso y ayuda a demostrar que no son casos aislados.">
+  <meta name="twitter:image" content="https://nomellamenmas.com/assets/img/og.png">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Tipografía autoalojada (subconjunto latino, licencia OFL): ninguna petición a terceros -->
+  <link rel="preload" href="assets/fonts/archivo-700-800.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/atkinson-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/fuentes.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/landing.css">
+  <link rel="stylesheet" href="assets/css/modal.css">
+  <link rel="stylesheet" href="assets/css/wizard.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "NO ME LLAMEN MÁS",
+    "alternateName": "No me llames sin permiso",
+    "url": "https://nomellamenmas.com/",
+    "inLanguage": "es-CO",
+    "description": "Iniciativa ciudadana que documenta casos de llamadas comerciales no deseadas en Colombia."
+  }
+  </script>
+
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/modal.js" defer></script>
+  <script src="assets/js/api.js" defer></script>
+  <script src="assets/js/wizard.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="marca" href="#" aria-label="NO ME LLAMEN MÁS, inicio">
+        <svg class="marca__icono" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <circle cx="32" cy="32" r="32" fill="#C7271C"></circle>
+          <path fill="#FFFFFF" transform="translate(8 7.6) scale(2)" d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"></path>
+        </svg>
+        <span><b>No</b> me llamen más</span>
+      </a>
+      <a class="cabecera__enlace" href="#que-hacemos">¿Qué estamos haciendo?</a>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- HERO -->
+    <section class="hero" id="hero" aria-labelledby="titulo-hero">
+      <div class="contenedor">
+        <div>
+          <h1 class="hero__titulo" id="titulo-hero"><span class="rojo">No</span> me llamen más.</h1>
+        </div>
+        <div>
+          <p class="hero__lema">No me llames sin permiso.</p>
+          <p class="hero__texto">Estamos reuniendo casos de personas que reciben llamadas comerciales que no pidieron, para documentar lo que está ocurriendo y exigir soluciones.</p>
+          <div class="hero__acciones">
+            <button type="button" class="boton boton--principal" data-abrir-modal="registro">Registra tu caso</button>
+            <a class="hero__secundario" href="#que-hacemos">¿Qué estamos haciendo?
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </a>
+          </div>
+          <noscript><p class="hero__sin-js">Para registrar tu caso necesitas activar JavaScript en tu navegador.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <!-- ¿TE HA PASADO? -->
+    <section class="seccion" id="te-ha-pasado" aria-labelledby="titulo-pasado">
+      <div class="contenedor">
+        <h2 class="seccion__titulo" id="titulo-pasado">¿Te ha pasado?</h2>
+        <div class="frases">
+          <p class="frase revelar">Te llaman.</p>
+          <p class="frase revelar">No sabes de dónde tienen tu número.</p>
+          <p class="frase revelar">Dices que no quieres más llamadas.</p>
+          <p class="frase revelar">Y aun así vuelven a llamar.</p>
+          <p class="frase frase--remate revelar">No debería ser tan difícil decir: <span class="mayus">no me llames más.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NO SOLO NOS QUEJAMOS -->
+    <section class="seccion" id="que-hacemos" aria-labelledby="titulo-hacemos">
+      <div class="contenedor">
+        <h2 class="seccion__titulo" id="titulo-hacemos">No solo nos quejamos</h2>
+        <p class="seccion__intro">No queremos solamente contar cuántas personas están cansadas de recibir llamadas. Queremos documentar qué está ocurriendo, identificar patrones y reunir evidencia.</p>
+        <ul class="pilares">
+          <li class="pilar revelar">
+            <h3 class="pilar__nombre">Registrar</h3>
+            <p class="pilar__texto">Documentamos cada caso.</p>
+          </li>
+          <li class="pilar revelar">
+            <h3 class="pilar__nombre">Documentar</h3>
+            <p class="pilar__texto">Conservamos la evidencia disponible.</p>
+          </li>
+          <li class="pilar revelar">
+            <h3 class="pilar__nombre">Identificar</h3>
+            <p class="pilar__texto">Buscamos patrones y posibles incumplimientos.</p>
+          </li>
+          <li class="pilar revelar">
+            <h3 class="pilar__nombre">Actuar</h3>
+            <p class="pilar__texto">Con suficiente evidencia, evaluaremos las acciones legales y regulatorias que correspondan.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ¿QUÉ BUSCAMOS?: los tres objetivos de la iniciativa -->
+    <section class="seccion seccion--oscura" id="que-buscamos" aria-labelledby="titulo-buscamos">
+      <div class="contenedor">
+        <h2 class="seccion__titulo" id="titulo-buscamos">¿Qué buscamos?</h2>
+        <p class="seccion__intro">Tres cosas concretas. Ninguna debería ser difícil de conseguir.</p>
+        <ol class="objetivos">
+          <li class="objetivo revelar">
+            <span class="objetivo__numero" aria-hidden="true">01</span>
+            <h3 class="objetivo__titulo">Que no te llamen más.</h3>
+            <p class="objetivo__texto">Que tu permiso sea claro y explícito. Cuando una empresa te pida el número, que tenga que decirte para qué te llamará, cuándo y cuántas veces, y que puedas decir que no. Y que si dices «no me llames más», con eso baste.</p>
+          </li>
+          <li class="objetivo revelar">
+            <span class="objetivo__numero" aria-hidden="true">02</span>
+            <h3 class="objetivo__titulo">Un solo lugar para decidir quién puede llamarte.</h3>
+            <p class="objetivo__texto">Hoy nadie en Colombia puede saber qué empresas tienen permiso para contactarlo: toca preguntar una por una y pedir retiros que muchas veces no se atienden. Proponemos cambiar la ley y crear un registro público del Estado donde cada persona vea quién tiene su autorización, la quite o la conserve con un clic, y donde contactar a quien retiró su permiso tenga sanción.</p>
+          </li>
+          <li class="objetivo revelar">
+            <span class="objetivo__numero" aria-hidden="true">03</span>
+            <h3 class="objetivo__titulo">Que responda quien incumpla.</h3>
+            <p class="objetivo__texto">Si una autoridad comprueba que una empresa te contactó sin permiso, o siguió llamando después de que pediste que parara, que haya consecuencias: sanciones y, cuando la ley lo permita, una compensación económica para las personas afectadas, a través de las reclamaciones que correspondan. No es una promesa: es lo que vamos a exigir, con evidencia.</p>
+          </li>
+        </ol>
+        <p class="objetivos__cierre">Nada de esto pasa sin evidencia. <span class="rojo">Por eso cada caso cuenta.</span></p>
+      </div>
+    </section>
+
+    <!-- ¿A TI TAMBIÉN TE LLAMAN? -->
+    <section class="cierre" id="registra" aria-labelledby="titulo-cierre">
+      <div class="contenedor">
+        <div>
+          <h2 class="cierre__titulo" id="titulo-cierre">¿A ti también te llaman?</h2>
+          <p class="cierre__sub">Registra tu caso.</p>
+        </div>
+        <div>
+          <button type="button" class="boton boton--claro" data-abrir-modal="registro">Registrar mi caso</button>
+          <p class="cierre__nota">Tu reporte puede ayudar a demostrar que no se trata de casos aislados.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie" id="pie">
+    <div class="contenedor">
+      <ul class="pie__enlaces">
+        <li><button type="button" data-abrir-modal="como-funciona">¿Cómo funciona?</button></li>
+        <li><button type="button" data-abrir-modal="mis-datos">Mis datos</button></li>
+        <li><button type="button" data-abrir-modal="privacidad">Privacidad</button></li>
+        <li><button type="button" data-abrir-modal="terminos">Términos</button></li>
+        <li><a href="mailto:hola@nomellamenmas.com">Contacto</a></li>
+      </ul>
+      <p class="pie__aviso"><strong>Iniciativa ciudadana independiente.</strong> No somos una entidad pública. Nunca te llamaremos ni te pediremos claves: solo te escribiremos al correo que registres.</p>
+    </div>
+  </footer>
+
+  <!-- CTA fija en móvil: aparece al dejar atrás el hero -->
+  <div class="cta-fija" id="cta-fija" inert>
+    <button type="button" class="boton boton--principal" data-abrir-modal="registro">Registra tu caso</button>
+  </div>
+
+  <!-- ============================ MODALES DE TEXTO ============================ -->
+
+  <dialog class="modal modal--volver" id="modal-como-funciona" aria-labelledby="titulo-como-funciona">
+    <div class="modal__cabecera">
+      <div class="modal__encabezado">
+        <h2 class="modal__titulo" id="titulo-como-funciona" tabindex="-1">¿Cómo funciona?</h2>
+        <p class="modal__subtitulo">Qué pasa con tu caso, paso a paso</p>
+      </div>
+      <button type="button" class="modal__cerrar" data-cerrar-modal aria-label="Cerrar">
+        <svg class="modal__equis" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>
+        <svg class="modal__volver" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+    <div class="modal__cuerpo">
+      <div class="texto">
+        <ol>
+          <li><strong>Registras tu caso.</strong> Respondes cuatro preguntas cortas sobre las llamadas y nos dejas un correo. Toma unos dos minutos y nada de lo que escribes se publica.</li>
+          <li><strong>Lo revisamos y documentamos.</strong> Cada caso se guarda con fecha y se suma a los demás. Si la iniciativa avanza hacia acciones legales, te escribiremos para preguntarte si quieres participar y aportar detalles y evidencia.</li>
+          <li><strong>Buscamos patrones.</strong> Cruzamos los casos: quién llama, con qué frecuencia y en qué horarios, si hubo autorización, si pediste que pararan y si siguieron llamando.</li>
+          <li><strong>Con evidencia suficiente, actuamos.</strong> Los casos se analizan jurídicamente para definir las acciones legales y regulatorias que correspondan. No prometemos un resultado: prometemos documentar en serio.</li>
+        </ol>
+
+        <h3>Lo que puedes hacer hoy, además de registrar tu caso</h3>
+        <ul>
+          <li><strong>Pídele por escrito a la empresa</strong> que no te contacte más y que elimine tu número de sus bases. Tu número es un dato personal y puedes revocar la autorización que hayas dado. Guarda la respuesta: es evidencia.</li>
+          <li><strong>Inscribe tu número en el Registro de Números Excluidos</strong> de la Superintendencia de Industria y Comercio (SIC). <!-- VERIFICAR CITA: enlace oficial del RNE --></li>
+          <li><strong>Si siguen llamando, presenta una queja ante la SIC</strong> y guarda el número de radicado.</li>
+        </ul>
+
+        <h3>Qué no es esto</h3>
+        <p>Registrar tu caso no es una asesoría legal individual ni una denuncia formal. Es la forma de sumar tu experiencia a una documentación colectiva. Cuando haya novedades, te avisaremos al correo que registres.</p>
+        <p class="destacado">Los casos son reportes ciudadanos. Si una empresa incumplió la ley, eso lo establece una autoridad, no nosotros.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal modal--volver" id="modal-mis-datos" aria-labelledby="titulo-mis-datos">
+    <div class="modal__cabecera">
+      <div class="modal__encabezado">
+        <h2 class="modal__titulo" id="titulo-mis-datos" tabindex="-1">Mis datos</h2>
+        <p class="modal__subtitulo">¿Qué pasa con lo que cuento?</p>
+      </div>
+      <button type="button" class="modal__cerrar" data-cerrar-modal aria-label="Cerrar">
+        <svg class="modal__equis" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>
+        <svg class="modal__volver" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+    <div class="modal__cuerpo">
+      <div class="texto">
+        <h3>Qué guardamos</h3>
+        <p>Lo que respondes sobre las llamadas, tu correo y, si los das, tu nombre o seudónimo, tu teléfono y tu departamento. No pedimos documento de identidad, grabaciones ni pruebas: si el proceso avanza, te preguntaremos antes si quieres aportarlas.</p>
+
+        <h3>Para qué</h3>
+        <p>Para documentar tu caso, avisarte de novedades y permitirte actualizarlo, identificar patrones entre casos y, si hay evidencia suficiente, evaluar acciones legales o regulatorias. Para nada más.</p>
+
+        <h3>Quién lo ve</h3>
+        <p>Solo el equipo de la iniciativa y, cuando llegue el momento, el equipo jurídico que analice los casos. Tus datos de contacto se guardan separados de los datos del caso. <strong>Nunca publicamos nada que te identifique:</strong> ni tu nombre, ni tu número, ni tu correo, ni tu relato.</p>
+
+        <h3>Cuánto tiempo</h3>
+        <p>Mientras dure la iniciativa y tu caso sea necesario para estos fines. Puedes pedir que lo corrijamos o lo borremos cuando quieras.</p>
+
+        <h3>Dónde están los servidores</h3>
+        <p>En un proveedor tecnológico con servidores fuera de Colombia, con cifrado y controles de acceso. Lo declaramos en la <button type="button" class="enlace" data-abrir-modal="privacidad">política de privacidad</button>.</p>
+
+        <h3>Tus derechos</h3>
+        <p>Conocer, actualizar, corregir, pedir prueba de la autorización, revocarla y pedir que borremos tus datos. Escríbenos a <span class="pendiente-legal">datos@nomellamenmas.com</span> con tu código de caso.</p>
+
+        <p class="destacado">Nunca te llamaremos ni te pediremos claves. Solo te escribiremos al correo que registres. Si alguien te llama en nombre de NO ME LLAMEN MÁS pidiendo datos o dinero, no somos nosotros.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal modal--volver" id="modal-privacidad" aria-labelledby="titulo-privacidad">
+    <div class="modal__cabecera">
+      <div class="modal__encabezado">
+        <h2 class="modal__titulo" id="titulo-privacidad" tabindex="-1">Privacidad</h2>
+        <p class="modal__subtitulo">Política de tratamiento de datos personales</p>
+      </div>
+      <button type="button" class="modal__cerrar" data-cerrar-modal aria-label="Cerrar">
+        <svg class="modal__equis" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>
+        <svg class="modal__volver" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+    <div class="modal__cuerpo">
+      <div class="texto">
+        <!-- BORRADOR: texto pendiente de validación jurídica (D6). Lo marcado con .pendiente-legal falta por confirmar. -->
+        <p class="aviso-borrador">Borrador pendiente de revisión por abogado. Lo resaltado en amarillo aún no está confirmado.</p>
+
+        <h3>Quién es responsable de tus datos</h3>
+        <p><strong>Harold Vélez Solano</strong>, director de la iniciativa ciudadana NO ME LLAMEN MÁS, identificado con cédula de ciudadanía número 10.031.785, con domicilio en La Rivera, casa 4, Pereira, Risaralda, Colombia. Correo para todo lo relacionado con tus datos: <span class="pendiente-legal">datos@nomellamenmas.com</span>.</p>
+
+        <h3>Qué normas aplican</h3>
+        <p>La Ley 1581 de 2012, el Decreto 1377 de 2013 (compilado en el Decreto 1074 de 2015) y las normas que los complementen. Tu número de teléfono, tu correo y tu nombre son datos personales: tienes derechos sobre cómo se usan.</p>
+
+        <h3>Qué datos tratamos</h3>
+        <ul>
+          <li>Lo que respondes sobre las llamadas: canal, frecuencia, horarios, empresa o sector, si habías autorizado el contacto, si pediste que pararan y si continuaron, y lo que quieras contarnos en texto libre.</li>
+          <li>Tu correo electrónico, obligatorio para avisarte y permitirte actualizar tu caso.</li>
+          <li>Si los das: tu nombre o seudónimo, tu teléfono y tu departamento.</li>
+          <li>Datos técnicos mínimos para evitar abusos: una huella de tu conexión que no permite identificarte y que borramos a los 90 días.</li>
+        </ul>
+
+        <h3>Para qué los usamos</h3>
+        <ol>
+          <li>Documentar tu caso y conservarlo con fecha.</li>
+          <li>Avisarte de novedades sobre tu caso y sobre la iniciativa, y permitirte actualizarlo o retirarlo.</li>
+          <li>Analizar los casos en conjunto para identificar patrones.</li>
+          <li>Si reunimos evidencia suficiente, evaluar y sustentar las acciones legales o regulatorias que correspondan.</li>
+          <li>Elaborar estadísticas agregadas que nunca te identifican.</li>
+        </ol>
+        <p>No vendemos ni cedemos tus datos con fines comerciales. No los usamos para nada distinto de lo anterior.</p>
+
+        <h3>Cómo nos autorizas</h3>
+        <p>Al marcar la casilla de autorización en el formulario. Guardamos la fecha, la versión de este texto y una huella técnica como prueba de esa autorización. Puedes revocarla cuando quieras.</p>
+
+        <h3>Quién puede verlos</h3>
+        <p>El equipo de la iniciativa y, cuando llegue el momento, el equipo jurídico que analice los casos, siempre con deber de confidencialidad. Tus datos de contacto se guardan separados de los datos del caso, con acceso restringido. Nunca publicamos nada que te identifique.</p>
+
+        <h3>Dónde se guardan</h3>
+        <p>En la infraestructura de nuestro proveedor tecnológico, con servidores en Estados Unidos (Ohio), con cifrado en tránsito y controles de acceso. Al autorizar el tratamiento aceptas esta transferencia internacional de datos. <span class="pendiente-legal">[Pendiente de confirmar con abogado: nivel adecuado de protección según la Circular Externa 005 de 2017 de la SIC]</span></p>
+
+        <h3>Cuánto tiempo</h3>
+        <p>Mientras la iniciativa esté activa y tu caso sea necesario para las finalidades descritas. Los datos técnicos de conexión se borran a los 90 días. Si pides la supresión, la hacemos, salvo que exista un deber legal de conservar la información, por ejemplo por una actuación en curso; en ese caso te lo explicamos.</p>
+
+        <h3>Tus derechos</h3>
+        <ul>
+          <li>Conocer, actualizar y rectificar tus datos.</li>
+          <li>Pedir prueba de la autorización que nos diste.</li>
+          <li>Saber qué uso les hemos dado.</li>
+          <li>Revocar la autorización y pedir la supresión de tus datos.</li>
+          <li>Presentar quejas ante la Superintendencia de Industria y Comercio (SIC).</li>
+        </ul>
+        <p>Para ejercerlos, escribe a <span class="pendiente-legal">datos@nomellamenmas.com</span> desde el correo que registraste, indicando tu código de caso. Respondemos las consultas en un máximo de 10 días hábiles y los reclamos en un máximo de 15 días hábiles. <span class="pendiente-legal">[Verificar plazos]</span></p>
+
+        <h3>Menores de edad</h3>
+        <p>El formulario es solo para mayores de edad. No tratamos datos de menores.</p>
+
+        <h3>Seguridad</h3>
+        <p>Cifrado en tránsito, acceso restringido y registrado, separación de los datos de contacto, verificación antirrobots y límites contra el abuso.</p>
+
+        <h3>Cambios</h3>
+        <p>Si cambiamos esta política, publicaremos la nueva versión aquí con su fecha. Versión <strong>2026-09, borrador 2</strong>. Vigente desde <span class="pendiente-legal">[fecha de lanzamiento]</span>.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal modal--volver" id="modal-terminos" aria-labelledby="titulo-terminos">
+    <div class="modal__cabecera">
+      <div class="modal__encabezado">
+        <h2 class="modal__titulo" id="titulo-terminos" tabindex="-1">Términos</h2>
+        <p class="modal__subtitulo">Condiciones de uso de la iniciativa</p>
+      </div>
+      <button type="button" class="modal__cerrar" data-cerrar-modal aria-label="Cerrar">
+        <svg class="modal__equis" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>
+        <svg class="modal__volver" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+    <div class="modal__cuerpo">
+      <div class="texto">
+        <!-- BORRADOR: texto pendiente de validación jurídica (D6). -->
+        <p class="aviso-borrador">Borrador pendiente de validación jurídica.</p>
+
+        <h3>Qué es NO ME LLAMEN MÁS</h3>
+        <p>Una iniciativa ciudadana independiente, dirigida por <strong>Harold Vélez Solano</strong> (cédula de ciudadanía 10.031.785, Pereira, Risaralda), que reúne y documenta casos de llamadas y mensajes comerciales no deseados en Colombia. No es una entidad pública ni una firma de abogados, y registrar un caso no crea una relación de representación legal.</p>
+
+        <h3>Qué haces al registrar un caso</h3>
+        <ul>
+          <li>Declaras que la información es cierta y se refiere a tu propia experiencia.</li>
+          <li>Autorizas que la usemos para documentar, analizar en conjunto y, si hay evidencia suficiente, sustentar acciones legales o regulatorias, según la <button type="button" class="enlace" data-abrir-modal="privacidad">política de privacidad</button>.</li>
+          <li>Te comprometes a no registrar información falsa ni datos personales de otras personas distintos de la empresa o el número que te contacta.</li>
+        </ul>
+
+        <h3>Qué no garantizamos</h3>
+        <p>Ningún resultado, plazo, acción concreta ni compensación. Que reunamos casos no significa que exista una demanda ni que vaya a existir. Si hay evidencia suficiente, los casos se analizarán jurídicamente para definir qué acciones proceden, y te lo contaremos.</p>
+
+        <h3>Reportes ciudadanos, no sentencias</h3>
+        <p>Los casos que recibimos son reportes de personas. No afirmamos que una empresa haya incumplido la ley: eso solo lo puede establecer una autoridad. Por eso hablamos de casos reportados, casos documentados y posibles incumplimientos.</p>
+
+        <h3>Tu caso, tus decisiones</h3>
+        <p>Puedes actualizar o retirar tu caso cuando quieras escribiendo a <span class="pendiente-legal">datos@nomellamenmas.com</span> con tu código.</p>
+
+        <h3>Contenidos y marca</h3>
+        <p>Los textos y la identidad de la iniciativa pueden compartirse libremente citando la fuente. No pueden usarse para hacerse pasar por la iniciativa.</p>
+
+        <h3>Ley aplicable</h3>
+        <p>Estos términos se rigen por las leyes de la República de Colombia.</p>
+
+        <h3>Contacto</h3>
+        <p><span class="pendiente-legal">hola@nomellamenmas.com</span>. Versión <strong>2026-09, borrador 2</strong>.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============================ REGISTRO DE CASO ============================ -->
+
+  <dialog class="modal modal--ancho" id="modal-registro" aria-labelledby="titulo-registro" data-mensaje-cierre="¿Cerrar el registro? Tus respuestas se guardan en este navegador hasta que cierres la pestaña.">
+    <form id="formulario-caso" class="wizard" novalidate>
+      <div class="modal__cabecera">
+        <div class="modal__encabezado">
+          <h2 class="modal__titulo" id="titulo-registro" tabindex="-1">Registra tu caso</h2>
+          <p class="wizard__meta" id="wizard-meta" hidden>Paso 1 de 7</p>
+          <div class="wizard__progreso" id="wizard-progreso" hidden aria-hidden="true"></div>
+        </div>
+        <button type="button" class="modal__cerrar" data-cerrar-modal aria-label="Cerrar el registro">
+          <svg class="modal__equis" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>
+        </button>
+      </div>
+
+      <div class="modal__cuerpo" id="wizard-cuerpo">
+        <p class="visualmente-oculto" id="wizard-vivo" aria-live="polite"></p>
+        <!-- Campo trampa contra robots: las personas no lo ven ni lo llenan -->
+        <input class="trampa" type="text" name="sitio_web" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <!-- INTRO -->
+        <section class="paso" data-paso="intro" aria-labelledby="p0-titulo">
+          <h3 class="paso__pregunta" id="p0-titulo" tabindex="-1">Antes de empezar</h3>
+          <div id="intro-nuevo">
+            <ul class="intro-lista">
+              <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Toma unos <strong>2 minutos</strong>.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Te haremos <strong>4 preguntas cortas</strong> sobre las llamadas. Solo marcas opciones.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Al final te pediremos un <strong>correo</strong> para poder avisarte y, si quieres, nos cuentas algo más.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg><span><strong>Nada de lo que escribas se publica.</strong> <button type="button" class="enlace" data-abrir-modal="mis-datos">Qué pasa con mis datos</button></span></li>
+            </ul>
+            <div class="intro-acciones">
+              <button type="button" class="boton boton--principal" id="btn-empezar">Empezar</button>
+            </div>
+          </div>
+          <div class="intro-borrador" id="intro-borrador" hidden>
+            <p>Encontramos un registro que dejaste a medias en este navegador.</p>
+            <div class="intro-acciones">
+              <button type="button" class="boton boton--principal" id="btn-continuar-borrador">Continuar donde iba</button>
+              <button type="button" class="boton boton--secundario" id="btn-nuevo">Empezar de nuevo</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- PASO 1 -->
+        <section class="paso" data-paso="1" aria-labelledby="p1-titulo" hidden>
+          <h3 class="paso__pregunta" id="p1-titulo" tabindex="-1">¿Qué ocurrió?</h3>
+          <p class="paso__ayuda">Cuéntanos cómo y cuánto te contactan.</p>
+
+          <fieldset class="campo" data-campo="canal">
+            <legend>¿Cómo te contactan? <span class="campo__opcional">(puedes marcar varias)</span></legend>
+            <div class="opciones opciones--2">
+              <label class="opcion opcion--casilla"><input type="checkbox" name="canal" value="llamada"><span class="opcion__marca" aria-hidden="true"></span><span>Llamadas telefónicas</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="canal" value="sms"><span class="opcion__marca" aria-hidden="true"></span><span>Mensajes de texto (SMS)</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="canal" value="whatsapp"><span class="opcion__marca" aria-hidden="true"></span><span>Mensajes por WhatsApp</span></label>
+            </div>
+            <p class="error" id="err-canal"></p>
+          </fieldset>
+
+          <fieldset class="campo" data-campo="frecuencia">
+            <legend>¿Con qué frecuencia?</legend>
+            <div class="opciones opciones--2">
+              <label class="opcion"><input type="radio" name="frecuencia" value="una_vez"><span class="opcion__marca" aria-hidden="true"></span><span>Una vez</span></label>
+              <label class="opcion"><input type="radio" name="frecuencia" value="varias"><span class="opcion__marca" aria-hidden="true"></span><span>Varias veces</span></label>
+              <label class="opcion"><input type="radio" name="frecuencia" value="casi_diario"><span class="opcion__marca" aria-hidden="true"></span><span>Casi a diario</span></label>
+            </div>
+            <p class="error" id="err-frecuencia"></p>
+          </fieldset>
+
+          <fieldset class="campo" data-campo="ultima_vez">
+            <legend>¿Cuándo fue la última vez?</legend>
+            <div class="opciones opciones--2">
+              <label class="opcion"><input type="radio" name="ultima_vez" value="hoy"><span class="opcion__marca" aria-hidden="true"></span><span>Hoy</span></label>
+              <label class="opcion"><input type="radio" name="ultima_vez" value="esta_semana"><span class="opcion__marca" aria-hidden="true"></span><span>Esta semana</span></label>
+              <label class="opcion"><input type="radio" name="ultima_vez" value="este_mes"><span class="opcion__marca" aria-hidden="true"></span><span>Este mes</span></label>
+              <label class="opcion"><input type="radio" name="ultima_vez" value="antes"><span class="opcion__marca" aria-hidden="true"></span><span>Hace más de un mes</span></label>
+            </div>
+            <p class="error" id="err-ultima_vez"></p>
+          </fieldset>
+
+          <fieldset class="campo" data-campo="franja">
+            <legend>¿En qué horarios? <span class="campo__opcional">(opcional)</span></legend>
+            <div class="opciones opciones--2">
+              <label class="opcion opcion--casilla"><input type="checkbox" name="franja" value="manana"><span class="opcion__marca" aria-hidden="true"></span><span>En la mañana</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="franja" value="tarde"><span class="opcion__marca" aria-hidden="true"></span><span>En la tarde</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="franja" value="noche"><span class="opcion__marca" aria-hidden="true"></span><span>En la noche</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="franja" value="fin_de_semana_o_festivo"><span class="opcion__marca" aria-hidden="true"></span><span>Fines de semana o festivos</span></label>
+            </div>
+            <p class="error" id="err-franja"></p>
+          </fieldset>
+
+        </section>
+
+        <!-- PASO 2 -->
+        <section class="paso" data-paso="2" aria-labelledby="p2-titulo" hidden>
+          <h3 class="paso__pregunta" id="p2-titulo" tabindex="-1">¿Quién te llamó?</h3>
+          <p class="paso__ayuda">Si te contactan varias empresas, marca todo lo que aplique. No escribas nombres de las personas que llamaron.</p>
+
+          <fieldset class="campo" data-campo="sector">
+            <legend>¿Qué tipo de empresa era? <span class="campo__opcional">(puedes marcar varias)</span></legend>
+            <div class="opciones opciones--2">
+              <label class="opcion opcion--casilla"><input type="checkbox" name="sector" value="telecomunicaciones"><span class="opcion__marca" aria-hidden="true"></span><span>Telefonía, internet o TV</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="sector" value="banca"><span class="opcion__marca" aria-hidden="true"></span><span>Bancos, tarjetas o créditos</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="sector" value="seguros"><span class="opcion__marca" aria-hidden="true"></span><span>Seguros</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="sector" value="cobranza"><span class="opcion__marca" aria-hidden="true"></span><span>Cobranza</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="sector" value="educacion"><span class="opcion__marca" aria-hidden="true"></span><span>Educación o cursos</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="sector" value="salud"><span class="opcion__marca" aria-hidden="true"></span><span>Salud o medicina prepagada</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="sector" value="comercio"><span class="opcion__marca" aria-hidden="true"></span><span>Ventas y comercio</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="sector" value="otro"><span class="opcion__marca" aria-hidden="true"></span><span>Otro</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="sector" value="no_se_identifico"><span class="opcion__marca" aria-hidden="true"></span><span>No se identificaron</span></label>
+            </div>
+            <p class="error" id="err-sector"></p>
+          </fieldset>
+
+          <div class="campo" data-campo="empresa">
+            <label class="campo__etiqueta" for="c-empresa">¿Con qué nombre se identificaron? <span class="campo__opcional">(opcional)</span></label>
+            <input class="entrada" id="c-empresa" name="empresa" type="text" maxlength="120" autocomplete="off" placeholder="Nombre de la empresa o marca">
+            <p class="error" id="err-empresa"></p>
+          </div>
+
+          <fieldset class="campo" data-campo="proposito">
+            <legend>¿Qué querían? <span class="campo__opcional">(opcional, puedes marcar varias)</span></legend>
+            <div class="opciones opciones--2">
+              <label class="opcion opcion--casilla"><input type="checkbox" name="proposito" value="ofrecer"><span class="opcion__marca" aria-hidden="true"></span><span>Venderme u ofrecerme algo</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="proposito" value="cobrar"><span class="opcion__marca" aria-hidden="true"></span><span>Cobrarme</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="proposito" value="no_claro"><span class="opcion__marca" aria-hidden="true"></span><span>No quedó claro</span></label>
+            </div>
+            <p class="error" id="err-proposito"></p>
+          </fieldset>
+        </section>
+
+        <!-- PASO 3 -->
+        <section class="paso" data-paso="3" aria-labelledby="p3-titulo" hidden>
+          <h3 class="paso__pregunta" id="p3-titulo" tabindex="-1">¿Habías autorizado el contacto?</h3>
+          <p class="paso__ayuda">Tu número es un dato personal. Nadie debería usarlo para venderte algo sin tu permiso. Si son varias empresas, marca varias opciones.</p>
+
+          <fieldset class="campo" data-campo="autorizacion">
+            <legend>¿Le habías dado permiso a esa empresa para contactarte? <span class="campo__opcional">(puedes marcar varias)</span></legend>
+            <div class="opciones opciones--2">
+              <label class="opcion opcion--casilla"><input type="checkbox" name="autorizacion" value="si"><span class="opcion__marca" aria-hidden="true"></span><span>Sí, se lo había dado</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="autorizacion" value="no"><span class="opcion__marca" aria-hidden="true"></span><span>No</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="autorizacion" value="no_se"><span class="opcion__marca" aria-hidden="true"></span><span>No lo sé</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="autorizacion" value="no_recuerdo"><span class="opcion__marca" aria-hidden="true"></span><span>No lo recuerdo</span></label>
+            </div>
+            <p class="error" id="err-autorizacion"></p>
+          </fieldset>
+
+          <fieldset class="campo" data-campo="era_cliente">
+            <legend>¿Eres o fuiste cliente de esa empresa? <span class="campo__opcional">(puedes marcar varias)</span></legend>
+            <div class="opciones opciones--2">
+              <label class="opcion opcion--casilla"><input type="checkbox" name="era_cliente" value="si"><span class="opcion__marca" aria-hidden="true"></span><span>Sí</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="era_cliente" value="no"><span class="opcion__marca" aria-hidden="true"></span><span>No</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="era_cliente" value="no_se"><span class="opcion__marca" aria-hidden="true"></span><span>No lo sé</span></label>
+            </div>
+            <p class="error" id="err-era_cliente"></p>
+          </fieldset>
+
+        </section>
+
+        <!-- PASO 4 -->
+        <section class="paso" data-paso="4" aria-labelledby="p4-titulo" hidden>
+          <h3 class="paso__pregunta" id="p4-titulo" tabindex="-1">¿Pediste que dejaran de llamarte?</h3>
+
+          <fieldset class="campo" data-campo="pidio_cese">
+            <legend>¿Le dijiste a la empresa que no querías más contactos? <span class="campo__opcional">(puedes marcar varias)</span></legend>
+            <div class="opciones">
+              <label class="opcion opcion--casilla"><input type="checkbox" name="pidio_cese" value="en_llamada"><span class="opcion__marca" aria-hidden="true"></span><span>Sí, durante la llamada</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="pidio_cese" value="por_escrito"><span class="opcion__marca" aria-hidden="true"></span><span>Sí, por escrito (correo, chat, PQR)</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="pidio_cese" value="ante_sic_o_rne"><span class="opcion__marca" aria-hidden="true"></span><span>Sí, ante la SIC o el Registro de Números Excluidos</span></label>
+              <label class="opcion opcion--casilla"><input type="checkbox" name="pidio_cese" value="no"><span class="opcion__marca" aria-hidden="true"></span><span>No</span></label>
+            </div>
+            <p class="error" id="err-pidio_cese"></p>
+          </fieldset>
+
+          <div class="subcampo" id="sub-continuaron" hidden>
+            <fieldset class="campo" data-campo="continuaron">
+              <legend>¿Y siguieron contactándote después de pedirlo?</legend>
+              <div class="opciones opciones--2">
+                <label class="opcion"><input type="radio" name="continuaron" value="si"><span class="opcion__marca" aria-hidden="true"></span><span>Sí</span></label>
+                <label class="opcion"><input type="radio" name="continuaron" value="no"><span class="opcion__marca" aria-hidden="true"></span><span>No</span></label>
+                <label class="opcion"><input type="radio" name="continuaron" value="no_seguro"><span class="opcion__marca" aria-hidden="true"></span><span>No estoy seguro</span></label>
+              </div>
+              <p class="error" id="err-continuaron"></p>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- PASO 5 -->
+        <section class="paso" data-paso="5" aria-labelledby="p5-titulo" hidden>
+          <h3 class="paso__pregunta" id="p5-titulo" tabindex="-1">Tus datos y tu autorización</h3>
+          <p class="paso__ayuda">Lo mínimo para poder avisarte. Nada de esto se publica. <button type="button" class="enlace" data-abrir-modal="mis-datos">Qué pasa con mis datos</button></p>
+
+          <div class="campo" data-campo="nombre">
+            <label class="campo__etiqueta" for="c-nombre">Nombre o seudónimo <span class="campo__opcional">(opcional)</span></label>
+            <input class="entrada" id="c-nombre" name="nombre" type="text" maxlength="80" autocomplete="name">
+            <p class="error" id="err-nombre"></p>
+          </div>
+
+          <div class="campo" data-campo="correo">
+            <label class="campo__etiqueta" for="c-correo">Correo electrónico</label>
+            <p class="campo__pista">Es el canal para avisarte y para que puedas actualizar tu caso.</p>
+            <input class="entrada" id="c-correo" name="correo" type="email" inputmode="email" autocomplete="email" maxlength="120" required>
+            <p class="error" id="err-correo"></p>
+          </div>
+
+          <div class="campo" data-campo="telefono">
+            <label class="campo__etiqueta" for="c-telefono">Teléfono al que te llaman <span class="campo__opcional">(opcional)</span></label>
+            <p class="campo__pista">Nos ayuda a sustentar el caso en acciones futuras. Nunca se publica.</p>
+            <input class="entrada" id="c-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="310 123 4567">
+            <p class="error" id="err-telefono"></p>
+          </div>
+
+          <div class="campo" data-campo="ubicacion">
+            <label class="campo__etiqueta" for="c-ubicacion">Ciudad <span class="campo__opcional">(opcional)</span></label>
+            <p class="campo__pista">Escribe las primeras letras y elígela de la lista. Si la tuya no aparece, escríbela igual.</p>
+            <input class="entrada" id="c-ubicacion" name="ubicacion" type="text" maxlength="90" list="ciudades" autocomplete="address-level2" placeholder="Por ejemplo: Medellín, Antioquia">
+            <datalist id="ciudades"></datalist>
+            <p class="error" id="err-ubicacion"></p>
+          </div>
+
+          <div class="casillas-legales">
+            <label class="casilla-legal casilla-legal--obligatoria">
+              <input type="checkbox" name="acepto_tratamiento" required>
+              <span>Autorizo el tratamiento de mis datos para documentar mi caso, avisarme de novedades y, si hay evidencia suficiente, evaluar acciones legales o regulatorias, según la <button type="button" class="enlace" data-abrir-modal="privacidad">política de privacidad</button>.</span>
+            </label>
+            <label class="casilla-legal casilla-legal--obligatoria">
+              <input type="checkbox" name="acepto_veracidad" required>
+              <span>Declaro que la información que registré es cierta y se refiere a mi propia experiencia.</span>
+            </label>
+            <label class="casilla-legal casilla-legal--obligatoria">
+              <input type="checkbox" name="acepto_mayor" required>
+              <span>Soy mayor de edad.</span>
+            </label>
+            <label class="casilla-legal">
+              <input type="checkbox" name="novedades">
+              <span>Quiero recibir novedades de la campaña por correo. <span class="campo__opcional">(opcional)</span></span>
+            </label>
+            <p class="error" id="err-legales"></p>
+          </div>
+
+          <!-- El id no puede ser «turnstile»: los id crean una variable global del mismo
+               nombre y taparía a la biblioteca window.turnstile de Cloudflare. -->
+          <div class="turnstile" id="caja-turnstile"></div>
+        </section>
+
+        <!-- FIN -->
+        <section class="paso" data-paso="fin" aria-labelledby="pf-titulo" hidden>
+          <h3 class="paso__pregunta" id="pf-titulo" tabindex="-1">Tu caso quedó registrado.</h3>
+          <p class="paso__ayuda">Gracias por sumarte. Guarda este código: con él y tu correo podrás actualizar tu caso más adelante.</p>
+          <p><span class="codigo" id="codigo-caso">NMM-······</span></p>
+          <p class="aviso aviso--exito" id="aviso-correo" hidden>Te enviamos un correo de confirmación. Si no lo ves, revisa la carpeta de spam.</p>
+          <p class="aviso aviso--info" id="aviso-local" hidden><strong>Modo de prueba local.</strong> Este caso no se envió a ningún servidor y el código es de ejemplo.</p>
+          <h4 class="fin-sub">Qué pasa ahora</h4>
+          <ol class="fin-lista">
+            <li>Revisamos tu caso y lo sumamos a los demás.</li>
+            <li>Si la iniciativa avanza hacia acciones legales, te escribiremos para preguntarte si quieres participar y aportar más detalles.</li>
+            <li>Cuando haya novedades sobre la iniciativa, te avisamos al correo.</li>
+          </ol>
+          <p class="paso__ayuda">Recuerda: nunca te llamaremos ni te pediremos claves.</p>
+          <div class="intro-acciones">
+            <button type="button" class="boton boton--principal" id="btn-compartir">Compartir la campaña</button>
+            <button type="button" class="boton boton--secundario" id="btn-cerrar-fin">Cerrar</button>
+          </div>
+          <p class="datalista-nota" id="compartir-msj" aria-live="polite"></p>
+        </section>
+
+        <p class="aviso aviso--error" id="wizard-error" role="alert" hidden></p>
+      </div>
+
+      <div class="modal__pie wizard__pie" id="wizard-pie" hidden>
+        <button type="button" class="boton boton--secundario" id="wizard-atras">Atrás</button>
+        <button type="button" class="boton boton--principal" id="wizard-siguiente">Continuar</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

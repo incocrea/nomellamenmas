@@ -1,0 +1,8 @@
+Fuentes autoalojadas de NO ME LLAMEN MÁS (subconjunto latino, descargadas de Google Fonts el 2026-09-07).
+
+archivo-700-800.woff2   Archivo, fuente variable, pesos 700 a 800 (Omnibus-Type). Licencia SIL OFL 1.1.
+atkinson-400.woff2      Atkinson Hyperlegible Regular (Braille Institute). Licencia SIL OFL 1.1.
+atkinson-700.woff2      Atkinson Hyperlegible Bold (Braille Institute). Licencia SIL OFL 1.1.
+
+Las declaraciones @font-face están en ../css/fuentes.css. Si se cambia de fuente, regenerar también la OG
+(tools/iconos.py) y revisar tildes, ñ y signos de apertura.

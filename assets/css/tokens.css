@@ -1,0 +1,61 @@
+/* ==========================================================================
+   NO ME LLAMEN MÁS · tokens.css
+   Solo variables: color, tipografía, espacio, forma y movimiento.
+   Ningún selector de componente vive aquí. Ver docs/00 §2.5 para la
+   justificación de la paleta (rojo «colgar») y las tipografías.
+   ========================================================================== */
+:root {
+  /* --- Color ------------------------------------------------------------- */
+  --papel: #F2F3F1;          /* fondo de la página: claro frío, no crema */
+  --superficie: #FFFFFF;     /* paneles, modales, campos */
+  --tinta: #1B1D21;          /* texto principal */
+  --tinta-suave: #5A6370;    /* texto secundario (AA sobre papel y superficie) */
+  --linea: #D6D8D3;          /* separadores */
+  --linea-fuerte: #B4B8B1;   /* bordes de campos y opciones */
+  --rojo: #C7271C;           /* acento: CTA, el «NO», el bloque final */
+  --rojo-oscuro: #9E1C14;    /* estado pulsado / texto de error */
+  --rojo-tinte: #FBE7E4;     /* fondos suaves del acento */
+  --rojo-claro: #F0695D;     /* el acento sobre fondo oscuro (bloque de objetivos) */
+  --verde: #1E6F49;          /* solo estados de éxito */
+  --verde-tinte: #E1F0E7;
+  --foco: #1B5FD9;           /* anillo de foco visible, distinto del acento */
+  --blanco: #FFFFFF;
+  --sombra-modal: 0 24px 64px rgba(27, 29, 33, 0.28);
+  --sombra-cta: 0 8px 22px rgba(199, 39, 28, 0.28);
+
+  /* --- Tipografía -------------------------------------------------------- */
+  --display: 'Archivo', 'Arial Narrow', Arial, sans-serif;
+  --texto: 'Atkinson Hyperlegible', system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  /* Escala fluida pensada de 360 px a 1280 px */
+  --t-base: clamp(1.0625rem, 1rem + 0.3vw, 1.125rem);   /* 17 → 18 px */
+  --t-chico: 0.9rem;
+  --t-h1: clamp(3rem, 13.5vw, 7rem);                     /* el titular ES la imagen */
+  --t-h2: clamp(1.85rem, 6.5vw, 3rem);
+  --t-frase: clamp(1.5rem, 5.6vw, 2.5rem);
+  --t-boton: 1.05rem;
+
+  /* --- Espacio ----------------------------------------------------------- */
+  --e-1: 0.25rem;
+  --e-2: 0.5rem;
+  --e-3: 0.75rem;
+  --e-4: 1rem;
+  --e-5: 1.5rem;
+  --e-6: 2rem;
+  --e-7: 3rem;
+  --e-8: 4.5rem;
+  --seccion-y: clamp(3.5rem, 10vw, 7rem);
+  --ancho-max: 1120px;
+  --ancho-texto: 36rem;
+  --diana: 48px;             /* tamaño mínimo táctil */
+
+  /* --- Forma ------------------------------------------------------------- */
+  --radio-boton: 10px;
+  --radio-tarjeta: 14px;
+  --radio-modal: 20px;
+
+  /* --- Movimiento -------------------------------------------------------- */
+  --dur-corta: 160ms;
+  --dur-media: 220ms;
+  --suave: cubic-bezier(0.2, 0.7, 0.2, 1);
+}

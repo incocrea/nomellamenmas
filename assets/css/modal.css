@@ -1,0 +1,180 @@
+/* ==========================================================================
+   NO ME LLAMEN MÁS · modal.css
+   Sistema de modales sobre <dialog>. Escritorio: panel centrado con scroll
+   interno. Móvil (< 768 px): pantalla completa con cabecera pegajosa.
+   ========================================================================== */
+.modal {
+  /* El UA pone position: fixed, inset: 0 y margin: auto; lo respetamos */
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  max-width: min(680px, 92vw);
+  max-height: min(85vh, 900px);
+  max-height: min(85dvh, 900px);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radio-modal);
+  background: var(--superficie);
+  color: var(--tinta);
+  box-shadow: var(--sombra-modal);
+  overflow: hidden;
+}
+.modal[open] { display: flex; }
+.modal--ancho { max-width: min(760px, 92vw); }
+
+.modal::backdrop {
+  background: rgba(27, 29, 33, 0.55);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.modal__cabecera {
+  flex: none;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-3);
+  padding: var(--e-4) var(--e-5);
+  border-bottom: 1px solid var(--linea);
+  background: var(--superficie);
+}
+.modal__encabezado { flex: 1 1 auto; min-width: 0; }
+.modal__titulo {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.3rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  outline: none;
+}
+.modal__subtitulo {
+  margin-top: var(--e-1);
+  font-size: var(--t-chico);
+  color: var(--tinta-suave);
+}
+
+.modal__cerrar {
+  flex: none;
+  width: var(--diana);
+  height: var(--diana);
+  margin: calc(var(--e-2) * -1) calc(var(--e-3) * -1) 0 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--tinta);
+  transition: background-color var(--dur-corta) ease;
+}
+.modal__cerrar:hover { background: var(--papel); }
+.modal__cerrar svg { width: 22px; height: 22px; }
+.modal__cerrar .modal__volver { display: none; }
+
+.modal__cuerpo {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: var(--e-5);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal__pie {
+  flex: none;
+  padding: var(--e-4) var(--e-5) calc(var(--e-4) + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--linea);
+  background: var(--superficie);
+}
+
+/* --- Texto largo (legales, cómo funciona, mis datos) ---------------------- */
+.texto { max-width: 62ch; }
+.texto h3 {
+  margin-top: var(--e-6);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  line-height: 1.25;
+}
+.texto h3:first-child { margin-top: 0; }
+.texto p,
+.texto ul,
+.texto ol { margin-top: var(--e-3); }
+.texto ul,
+.texto ol { padding-left: 1.25em; }
+.texto li + li { margin-top: var(--e-2); }
+.texto strong { font-weight: 700; }
+.texto .destacado {
+  margin-top: var(--e-4);
+  padding: var(--e-3) var(--e-4);
+  background: var(--papel);
+  border-radius: var(--radio-boton);
+  font-weight: 700;
+}
+
+.aviso-borrador {
+  margin-bottom: var(--e-4);
+  padding: var(--e-3) var(--e-4);
+  background: var(--rojo-tinte);
+  color: var(--rojo-oscuro);
+  border-radius: var(--radio-boton);
+  font-size: var(--t-chico);
+  font-weight: 700;
+}
+
+.texto .pendiente-legal {
+  background: #FFF3C4;
+  color: #6B5410;
+  padding: 0 0.3em;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+/* --- Animación de entrada -------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .modal[open] { animation: modal-entrar var(--dur-media) var(--suave); }
+  .modal[open]::backdrop { animation: fondo-entrar var(--dur-media) ease; }
+}
+@keyframes modal-entrar {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fondo-entrar {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* --- Móvil: pantalla completa --------------------------------------------- */
+@media (max-width: 767px) {
+  .modal,
+  .modal--ancho {
+    inset: 0;
+    margin: 0;
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .modal__cabecera {
+    position: sticky;
+    top: 0;
+    padding: calc(var(--e-3) + env(safe-area-inset-top)) var(--e-4) var(--e-3);
+    align-items: center;
+  }
+  .modal__cuerpo { padding: var(--e-4) var(--e-4) var(--e-6); }
+  .modal__pie { padding-inline: var(--e-4); }
+  .modal__cerrar { margin: 0 calc(var(--e-2) * -1) 0 0; }
+
+  @keyframes modal-entrar {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: none; }
+  }
+}
+
+/* En móvil, los modales de texto muestran «Volver» a la izquierda en vez de la X */
+@media (max-width: 767px) {
+  .modal--volver .modal__cabecera { flex-direction: row-reverse; justify-content: flex-end; }
+  .modal--volver .modal__cerrar { margin: 0 0 0 calc(var(--e-2) * -1); }
+  .modal--volver .modal__cerrar .modal__equis { display: none; }
+  .modal--volver .modal__cerrar .modal__volver { display: block; }
+}

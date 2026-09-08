@@ -1,0 +1,15 @@
+{
+  "name": "NO ME LLAMEN MÁS",
+  "short_name": "No me llamen",
+  "description": "No me llames sin permiso. Registra tu caso.",
+  "lang": "es-CO",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F2F3F1",
+  "theme_color": "#C7271C",
+  "icons": [
+    { "src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/img/icono-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

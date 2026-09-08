@@ -1,0 +1,374 @@
+/* ==========================================================================
+   NO ME LLAMEN MÁS · landing.css
+   Las cinco secciones de la landing, la cabecera, el pie y la barra CTA fija.
+   Móvil primero (360 px); los @media solo reorganizan, nunca añaden contenido.
+   ========================================================================== */
+
+/* --- Cabecera y marca ----------------------------------------------------- */
+.cabecera { padding-block: var(--e-5); }
+.cabecera .contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-4);
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.marca__icono { width: 30px; height: 30px; flex: none; }
+.marca b { color: var(--rojo); font-weight: 800; }
+
+.cabecera__enlace {
+  display: none;
+  font-size: var(--t-chico);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  text-decoration: none;
+  padding: var(--e-3) 0;
+}
+.cabecera__enlace:hover { color: var(--rojo); }
+@media (min-width: 640px) {
+  .cabecera__enlace { display: inline-block; }
+}
+
+/* --- Hero ------------------------------------------------------------------ */
+.hero { padding-block: clamp(1.5rem, 5vw, 4rem) var(--seccion-y); }
+
+.hero__titulo {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: var(--t-h1);
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  max-width: 8ch;
+}
+
+.hero__lema {
+  margin-top: var(--e-5);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 4.8vw, 1.85rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.hero__texto {
+  margin-top: var(--e-4);
+  max-width: var(--ancho-texto);
+  font-size: 1.05em;
+}
+
+.hero__acciones {
+  margin-top: var(--e-6);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--e-4);
+}
+
+.hero__secundario {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  min-height: 44px;
+  font-size: var(--t-chico);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  text-decoration: none;
+}
+.hero__secundario:hover { color: var(--rojo); }
+.hero__secundario svg { width: 16px; height: 16px; }
+
+.hero__sin-js {
+  margin-top: var(--e-4);
+  padding: var(--e-3) var(--e-4);
+  background: var(--rojo-tinte);
+  color: var(--rojo-oscuro);
+  border-radius: var(--radio-boton);
+  font-size: var(--t-chico);
+  max-width: var(--ancho-texto);
+}
+
+@media (min-width: 1024px) {
+  .hero .contenedor {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: var(--e-7);
+    align-items: end;
+  }
+  .hero__titulo { max-width: none; }
+  .hero__lema { margin-top: 0; }
+}
+
+/* --- Secciones ------------------------------------------------------------- */
+.seccion {
+  padding-block: var(--seccion-y);
+  border-top: 1px solid var(--linea);
+  scroll-margin-top: var(--e-4);
+}
+
+.seccion__titulo {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: var(--t-h2);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.seccion__intro {
+  margin-top: var(--e-4);
+  max-width: var(--ancho-texto);
+  font-size: 1.08em;
+}
+
+/* --- ¿Te ha pasado? -------------------------------------------------------- */
+.frases {
+  margin-top: var(--e-6);
+  display: grid;
+  gap: var(--e-3);
+  max-width: 42rem;
+}
+
+.frase {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: var(--t-frase);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
+.frase--remate {
+  margin-top: var(--e-5);
+  padding-top: var(--e-5);
+  border-top: 4px solid var(--rojo);
+  color: var(--rojo);
+}
+
+/* --- No solo nos quejamos: pilares ---------------------------------------- */
+.pilares {
+  margin-top: var(--e-6);
+  display: grid;
+  gap: var(--e-5);
+  list-style: none;
+  padding: 0;
+}
+@media (min-width: 640px) {
+  .pilares { grid-template-columns: repeat(2, 1fr); gap: var(--e-6); }
+}
+@media (min-width: 1024px) {
+  .pilares { grid-template-columns: repeat(4, 1fr); }
+}
+
+.pilar {
+  padding-top: var(--e-4);
+  border-top: 3px solid var(--tinta);
+}
+.pilar__nombre {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.pilar__texto {
+  margin-top: var(--e-2);
+  color: var(--tinta-suave);
+  max-width: 24rem;
+}
+
+/* --- ¿Qué buscamos?: los tres objetivos, en bloque oscuro ------------------ */
+/* Es el manifiesto de la iniciativa: el único bloque oscuro de la página,
+   justo antes del cierre rojo. */
+.seccion--oscura {
+  background: var(--tinta);
+  color: var(--papel);
+  border-top: 0;
+}
+.seccion--oscura .seccion__intro { color: rgba(242, 243, 241, 0.78); }
+.seccion--oscura ::selection { background: var(--rojo); color: var(--blanco); }
+
+.objetivos {
+  margin-top: var(--e-7);
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--e-6);
+}
+@media (min-width: 1024px) {
+  .objetivos { grid-template-columns: repeat(3, 1fr); gap: var(--e-7); }
+}
+
+.objetivo {
+  padding-top: var(--e-5);
+  border-top: 1px solid rgba(242, 243, 241, 0.22);
+}
+.objetivo__numero {
+  display: block;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 2.6rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--rojo-claro);
+}
+.objetivo__titulo {
+  margin-top: var(--e-3);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.55rem, 5.6vw, 2.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.objetivo__texto {
+  margin-top: var(--e-3);
+  color: rgba(242, 243, 241, 0.84);
+  max-width: 36ch;
+}
+
+.objetivos__cierre {
+  margin-top: var(--e-7);
+  padding-top: var(--e-5);
+  border-top: 1px solid rgba(242, 243, 241, 0.22);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 4vw, 1.55rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  max-width: 30ch;
+}
+.objetivos__cierre .rojo { color: var(--rojo-claro); }
+
+/* --- Cierre: ¿A ti también te llaman? ------------------------------------- */
+.cierre {
+  background: var(--rojo);
+  color: var(--blanco);
+  padding-block: var(--seccion-y);
+}
+.cierre__titulo {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: var(--t-h2);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.cierre__sub {
+  margin-top: var(--e-3);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 4.8vw, 1.85rem);
+}
+.cierre .boton { margin-top: var(--e-6); box-shadow: none; }
+.cierre .boton:focus-visible { outline-color: var(--blanco); }
+.cierre__nota {
+  margin-top: var(--e-5);
+  max-width: var(--ancho-texto);
+  color: var(--rojo-tinte);
+}
+@media (min-width: 1024px) {
+  .cierre .contenedor {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: var(--e-7);
+    align-items: center;
+  }
+  .cierre .boton { margin-top: 0; }
+  .cierre__nota { margin-top: var(--e-4); }
+}
+
+/* --- Pie ------------------------------------------------------------------- */
+.pie { padding-block: var(--e-7) calc(var(--e-8) + 56px); }
+@media (min-width: 640px) {
+  .pie { padding-bottom: var(--e-8); }
+}
+.pie__enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--e-5);
+  list-style: none;
+  padding: 0;
+}
+.pie__enlaces button,
+.pie__enlaces a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.pie__enlaces button:hover,
+.pie__enlaces a:hover { color: var(--rojo); }
+.pie__aviso {
+  margin-top: var(--e-5);
+  max-width: var(--ancho-texto);
+  color: var(--tinta-suave);
+  font-size: var(--t-chico);
+}
+.pie__aviso strong { color: var(--tinta); }
+
+/* --- CTA fija en móvil ----------------------------------------------------- */
+.cta-fija {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 50;
+  padding: var(--e-3) var(--e-4) calc(var(--e-3) + env(safe-area-inset-bottom));
+  background: rgba(242, 243, 241, 0.94);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--linea);
+  transform: translateY(110%);
+  transition: transform var(--dur-media) var(--suave);
+}
+.cta-fija.visible { transform: none; }
+.cta-fija .boton { min-height: 52px; }
+body.modal-abierto .cta-fija { display: none; }
+@media (min-width: 640px) {
+  .cta-fija { display: none; }
+}
+
+/* --- Entrada suave de elementos ------------------------------------------- */
+/* En reposo todo es visible; el JS solo marca «pendiente» lo que aún no está
+   en pantalla y lo revela al llegar. Sin JS o con movimiento reducido no pasa nada. */
+.js .revelar {
+  transition: opacity 520ms var(--suave), transform 520ms var(--suave);
+}
+.js .revelar.pendiente {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.js .frases .revelar:nth-child(2) { transition-delay: 90ms; }
+.js .frases .revelar:nth-child(3) { transition-delay: 180ms; }
+.js .frases .revelar:nth-child(4) { transition-delay: 270ms; }
+.js .frases .revelar:nth-child(5) { transition-delay: 420ms; }
+.js .pilares .revelar:nth-child(2),
+.js .objetivos .revelar:nth-child(2) { transition-delay: 80ms; }
+.js .pilares .revelar:nth-child(3),
+.js .objetivos .revelar:nth-child(3) { transition-delay: 160ms; }
+.js .pilares .revelar:nth-child(4),
+.js .objetivos .revelar:nth-child(4) { transition-delay: 240ms; }
+@media (prefers-reduced-motion: reduce) {
+  .js .revelar.pendiente { opacity: 1; transform: none; }
+}

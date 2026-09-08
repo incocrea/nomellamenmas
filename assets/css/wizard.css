@@ -1,0 +1,312 @@
+/* ==========================================================================
+   NO ME LLAMEN MÁS · wizard.css
+   El formulario por pasos que vive dentro de #modal-registro.
+   ========================================================================== */
+
+/* El formulario ocupa todo el <dialog> y reparte cabecera, cuerpo y pie */
+.wizard {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* --- Progreso en la cabecera --------------------------------------------- */
+.wizard__meta {
+  margin-top: var(--e-1);
+  font-size: var(--t-chico);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+.wizard__progreso {
+  display: flex;
+  gap: 4px;
+  margin-top: var(--e-3);
+}
+.wizard__progreso i {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--linea);
+  transition: background-color var(--dur-media) ease;
+}
+.wizard__progreso i.hecho { background: var(--rojo); }
+.wizard__meta[hidden],
+.wizard__progreso[hidden] { display: none; }
+
+/* --- Pasos ------------------------------------------------------------------ */
+.paso[hidden] { display: none; }
+.paso { display: block; }
+
+.paso__pregunta {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 5.2vw, 1.85rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  outline: none;
+}
+.paso__ayuda {
+  margin-top: var(--e-3);
+  color: var(--tinta-suave);
+  max-width: 50ch;
+}
+
+/* --- Campos ----------------------------------------------------------------- */
+.campo { margin-top: var(--e-6); }
+.campo:first-of-type { margin-top: var(--e-5); }
+.campo__etiqueta,
+.campo > legend {
+  display: block;
+  font-weight: 700;
+  margin-bottom: var(--e-3);
+  line-height: 1.3;
+}
+.campo__opcional {
+  font-weight: 400;
+  color: var(--tinta-suave);
+}
+.campo__pista {
+  margin: calc(var(--e-2) * -1) 0 var(--e-3);
+  font-size: var(--t-chico);
+  color: var(--tinta-suave);
+}
+
+.opciones {
+  display: grid;
+  gap: var(--e-2);
+}
+@media (min-width: 640px) {
+  .opciones--2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Opción en tarjeta: el input real queda oculto pero accesible */
+.opcion {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  min-height: var(--diana);
+  padding: var(--e-3) var(--e-4);
+  border: 2px solid var(--linea-fuerte);
+  border-radius: var(--radio-tarjeta);
+  background: var(--superficie);
+  font-weight: 700;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: border-color var(--dur-corta) ease, background-color var(--dur-corta) ease;
+}
+.opcion input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+.opcion__marca {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--tinta-suave);
+  border-radius: 50%;
+  background: var(--superficie);
+  transition: border-color var(--dur-corta) ease, box-shadow var(--dur-corta) ease;
+}
+.opcion--casilla .opcion__marca { border-radius: 6px; position: relative; }
+.opcion:hover { border-color: var(--tinta); }
+.opcion:has(input:checked) {
+  border-color: var(--rojo);
+  background: var(--rojo-tinte);
+}
+.opcion:has(input:checked) .opcion__marca {
+  border-color: var(--rojo);
+  box-shadow: inset 0 0 0 5px var(--rojo);
+}
+.opcion--casilla:has(input:checked) .opcion__marca {
+  background: var(--rojo);
+  box-shadow: none;
+}
+.opcion--casilla:has(input:checked) .opcion__marca::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--blanco);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+.opcion:has(input:focus-visible) {
+  outline: 3px solid var(--foco);
+  outline-offset: 2px;
+}
+
+.entrada {
+  display: block;
+  width: 100%;
+  min-height: var(--diana);
+  padding: var(--e-3) var(--e-4);
+  border: 2px solid var(--linea-fuerte);
+  border-radius: var(--radio-boton);
+  background: var(--superficie);
+  color: inherit;
+  font: inherit;
+  line-height: 1.4;
+  transition: border-color var(--dur-corta) ease;
+}
+.entrada:focus { border-color: var(--tinta); outline: none; box-shadow: 0 0 0 3px rgba(27, 95, 217, 0.25); }
+.entrada--area { min-height: 7.5rem; resize: vertical; }
+.entrada::placeholder { color: #8A929B; }
+.contador {
+  margin-top: var(--e-1);
+  font-size: var(--t-chico);
+  color: var(--tinta-suave);
+  text-align: right;
+}
+
+.subcampo { margin-top: var(--e-4); }
+.subcampo[hidden] { display: none; }
+
+/* Errores */
+.error {
+  display: none;
+  margin-top: var(--e-2);
+  color: var(--rojo-oscuro);
+  font-weight: 700;
+  font-size: var(--t-chico);
+}
+.campo.tiene-error .error { display: block; }
+.campo.tiene-error .entrada,
+.campo.tiene-error .opcion { border-color: var(--rojo); }
+.campo.tiene-error > legend,
+.campo.tiene-error .campo__etiqueta { color: var(--rojo-oscuro); }
+
+/* --- Pie del wizard ---------------------------------------------------------- */
+.wizard__pie {
+  display: grid;
+  grid-template-columns: 1fr 1.7fr;
+  gap: var(--e-3);
+}
+.wizard__pie[hidden] { display: none; }
+.wizard__pie .boton {
+  width: 100%;
+  min-width: 0;
+  min-height: 54px;
+  padding-inline: var(--e-4);
+}
+.wizard__pie--uno { grid-template-columns: 1fr; }
+
+/* --- Intro y confirmación ----------------------------------------------------- */
+.intro-lista {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--e-5);
+  display: grid;
+  gap: var(--e-3);
+}
+.intro-lista li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--e-3);
+  align-items: start;
+}
+.intro-lista svg { width: 24px; height: 24px; color: var(--rojo); margin-top: 2px; }
+.intro-acciones {
+  margin-top: var(--e-6);
+  display: grid;
+  gap: var(--e-3);
+}
+.intro-acciones .boton { width: 100%; min-width: 0; }
+.intro-borrador[hidden] { display: none; }
+.intro-borrador {
+  margin-top: var(--e-5);
+  padding: var(--e-4);
+  background: var(--papel);
+  border-radius: var(--radio-tarjeta);
+}
+.intro-borrador p { font-weight: 700; }
+.intro-borrador .intro-acciones { margin-top: var(--e-4); }
+
+.codigo {
+  display: inline-block;
+  margin-top: var(--e-4);
+  padding: var(--e-3) var(--e-4);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  letter-spacing: 0.08em;
+  color: var(--rojo);
+  background: var(--rojo-tinte);
+  border-radius: var(--radio-boton);
+  user-select: all;
+  -webkit-user-select: all;
+}
+.fin-sub {
+  margin-top: var(--e-6);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+.fin-lista {
+  margin-top: var(--e-3);
+  padding-left: 1.25em;
+}
+.fin-lista li + li { margin-top: var(--e-2); }
+
+.aviso {
+  margin-top: var(--e-4);
+  padding: var(--e-3) var(--e-4);
+  border-radius: var(--radio-boton);
+  font-size: var(--t-chico);
+  line-height: 1.45;
+}
+.aviso[hidden] { display: none; }
+.aviso--info { background: var(--papel); color: var(--tinta); }
+.aviso--error { background: var(--rojo-tinte); color: var(--rojo-oscuro); font-weight: 700; }
+.aviso--exito { background: var(--verde-tinte); color: var(--verde); font-weight: 700; }
+
+/* --- Consentimientos ------------------------------------------------------------ */
+.casillas-legales {
+  margin-top: var(--e-6);
+  border-top: 1px solid var(--linea);
+}
+.casilla-legal {
+  display: flex;
+  gap: var(--e-3);
+  align-items: flex-start;
+  padding: var(--e-4) 0;
+  border-bottom: 1px solid var(--linea);
+  cursor: pointer;
+}
+.casilla-legal input {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin: 2px 0 0;
+  accent-color: var(--rojo);
+  cursor: pointer;
+}
+.casilla-legal span { font-size: 0.97rem; line-height: 1.45; }
+.casillas-legales .error { margin-top: var(--e-3); }
+.casillas-legales.tiene-error .error { display: block; }
+.casillas-legales.tiene-error .casilla-legal--obligatoria span { color: var(--rojo-oscuro); }
+
+.turnstile { margin-top: var(--e-5); min-height: 0; }
+.turnstile:empty { display: none; }
+
+/* Campo trampa: fuera de pantalla, nunca visible ni enfocable */
+.trampa {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.datalista-nota { font-size: var(--t-chico); color: var(--tinta-suave); margin-top: var(--e-2); }
