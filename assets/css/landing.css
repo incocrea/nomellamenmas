@@ -190,6 +190,16 @@
      comillas y cinco píxeles menos que las frases que la preceden. */
   font-style: italic;
   font-size: calc(var(--t-frase) - 5px);
+  line-height: 1.2;
+}
+
+/* La petición concreta, que es lo único que se le pide a quien lee: más grande
+   y en tinta, para que salte dentro de la frase roja. El line-height compensa
+   el cuerpo mayor y mantiene parejo el interlineado del párrafo. */
+.frase__enfasis {
+  font-size: 1.22em;
+  line-height: 0.95;
+  color: var(--tinta);
 }
 
 /* --- No solo nos quejamos -------------------------------------------------- */
