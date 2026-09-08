@@ -82,6 +82,7 @@
           case 400: throw { tipo: 'validacion', campos: (d && d.campos) || {} };
           case 403: throw { tipo: 'origen' };
           case 404: throw { tipo: 'no_encontrado' };
+          case 410: throw { tipo: 'enlace_invalido' };
           case 429: throw { tipo: 'limite' };
           case 503: throw { tipo: 'mantenimiento' };
           default: throw { tipo: 'red' };

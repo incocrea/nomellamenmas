@@ -59,13 +59,24 @@
     if (abre) { cargarMiCaso(); }
   }, true);
 
-  /* El correo de confirmación trae un enlace con el código: nomellamenmas.com/?caso=NMM-XXXXXX
-     Abre la consulta con el código puesto. El código solo no da acceso: sigue
-     haciendo falta el correo con el que la persona se registró. */
+  /* El correo de confirmación trae dos formas de volver al caso:
+       ?t=<token firmado>  abre el caso de un clic, sin escribir nada
+       ?caso=NMM-XXXXXX    solo rellena el código (enlaces antiguos)
+     El token se quita de la barra de direcciones en cuanto se usa, para que no
+     quede en el historial ni se comparta por accidente al copiar la URL. */
   const NMM = window.NMM = window.NMM || {};
-  const codigo = (new URLSearchParams(location.search).get('caso') || '').trim().toUpperCase();
-  if (/^NMM-[A-Z2-9]{6}$/.test(codigo)) {
-    NMM.casoInicial = codigo;
+  const parametros = new URLSearchParams(location.search);
+  const token = (parametros.get('t') || '').trim();
+  const codigo = (parametros.get('caso') || '').trim().toUpperCase();
+
+  if (token || /^NMM-[A-Z2-9]{6}$/.test(codigo)) {
+    if (token) { NMM.tokenInicial = token; } else { NMM.casoInicial = codigo; }
+    try {
+      parametros.delete('t');
+      parametros.delete('caso');
+      const limpia = location.pathname + (parametros.toString() ? '?' + parametros : '');
+      history.replaceState(history.state, '', limpia);
+    } catch (e) { /* si el navegador no deja, seguimos igual */ }
     cargarMiCaso().then(() => {
       if (NMM.modal) { NMM.modal.abrir('mi-caso'); }
     });

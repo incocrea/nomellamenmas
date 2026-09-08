@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel · NO ME LLAMEN MÁS</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="same-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src https://*.supabase.co; base-uri 'self'; form-action 'none'; object-src 'none'">
+  <meta name="theme-color" content="#1B1D21">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/fuentes.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body>
+
+<!-- ============================== ENTRAR ============================== -->
+<main class="entrada" id="entrada">
+  <form class="tarjeta-entrada" id="form-entrar" autocomplete="on">
+    <div class="marca-panel">
+      <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" width="34" height="34">
+        <circle cx="32" cy="32" r="32" fill="#C7271C"></circle>
+        <path fill="#FFFFFF" transform="translate(8 7.6) scale(2)" d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"></path>
+      </svg>
+      <span>Panel de la iniciativa</span>
+    </div>
+    <h1>Entrar</h1>
+    <p class="apunte">Solo para el equipo. Cada acceso queda registrado.</p>
+
+    <label class="campo">
+      <span>Correo</span>
+      <input type="email" id="e-correo" autocomplete="username" required>
+    </label>
+    <label class="campo">
+      <span>Contraseña</span>
+      <input type="password" id="e-clave" autocomplete="current-password" required>
+    </label>
+
+    <p class="aviso aviso--error" id="e-error" role="alert" hidden></p>
+    <button class="boton boton--principal" type="submit" id="e-enviar">Entrar</button>
+    <p class="apunte apunte--pie">Este panel muestra datos personales de ciudadanos. No lo abras en equipos compartidos ni dejes la sesión abierta.</p>
+  </form>
+</main>
+
+<!-- ============================== PANEL ============================== -->
+<div class="panel" id="panel" hidden>
+  <header class="barra">
+    <div class="barra__marca">
+      <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" width="26" height="26">
+        <circle cx="32" cy="32" r="32" fill="#C7271C"></circle>
+        <path fill="#FFFFFF" transform="translate(8 7.6) scale(2)" d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"></path>
+      </svg>
+      <strong>Panel</strong>
+    </div>
+    <div class="barra__derecha">
+      <span class="quien" id="quien"></span>
+      <button type="button" class="boton boton--fantasma" id="salir">Salir</button>
+    </div>
+  </header>
+
+  <main class="contenido">
+
+    <!-- Cifras -->
+    <section aria-labelledby="t-cifras">
+      <h2 class="titulo-seccion" id="t-cifras">Cómo va</h2>
+      <div class="tarjetas" id="cifras"></div>
+    </section>
+
+    <!-- Reparto -->
+    <section aria-labelledby="t-reparto">
+      <h2 class="titulo-seccion" id="t-reparto">Dónde y quién</h2>
+      <div class="dos-columnas">
+        <div class="bloque">
+          <h3>Por tipo de empresa</h3>
+          <div class="barras" id="por-sector"></div>
+        </div>
+        <div class="bloque">
+          <h3>Por departamento</h3>
+          <div class="barras" id="por-departamento"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Casos -->
+    <section aria-labelledby="t-casos">
+      <div class="cabeza-casos">
+        <h2 class="titulo-seccion" id="t-casos">Casos <span class="conteo" id="conteo"></span></h2>
+        <button type="button" class="boton boton--fantasma" id="exportar">Descargar CSV</button>
+      </div>
+
+      <div class="filtros">
+        <label class="campo campo--linea">
+          <span>Buscar</span>
+          <input type="search" id="f-buscar" placeholder="código, empresa, ciudad, nombre, correo…">
+        </label>
+        <label class="campo campo--linea">
+          <span>Sector</span>
+          <select id="f-sector">
+            <option value="">Todos</option>
+            <option value="telecomunicaciones">Telefonía, internet o TV</option>
+            <option value="banca">Bancos, tarjetas o créditos</option>
+            <option value="seguros">Seguros</option>
+            <option value="cobranza">Cobranza</option>
+            <option value="educacion">Educación o cursos</option>
+            <option value="salud">Salud o medicina prepagada</option>
+            <option value="comercio">Ventas y comercio</option>
+            <option value="otro">Otro</option>
+            <option value="no_se_identifico">No se identificaron</option>
+          </select>
+        </label>
+        <label class="campo campo--linea">
+          <span>Estado</span>
+          <select id="f-estado">
+            <option value="">Todos</option>
+            <option value="recibido">Recibido</option>
+            <option value="en_revision">En revisión</option>
+            <option value="documentado">Documentado</option>
+            <option value="incluido">Incluido</option>
+            <option value="archivado">Archivado</option>
+          </select>
+        </label>
+        <label class="campo campo--linea">
+          <span>Riesgo</span>
+          <select id="f-riesgo">
+            <option value="-1">Cualquiera</option>
+            <option value="30">Sospechosos (30 o más)</option>
+            <option value="50">Sin verificar (50 o más)</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="aviso aviso--error" id="p-error" role="alert" hidden></p>
+      <p class="apunte" id="cargando" hidden>Cargando…</p>
+
+      <div class="tabla-envoltura">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">Recibido</th>
+              <th scope="col">Dónde</th>
+              <th scope="col">Empresa y sector</th>
+              <th scope="col">Persona</th>
+              <th scope="col">Estado</th>
+              <th scope="col"><span class="visualmente-oculto">Detalle</span></th>
+            </tr>
+          </thead>
+          <tbody id="filas"></tbody>
+        </table>
+      </div>
+      <p class="apunte" id="vacio" hidden>No hay casos que coincidan con lo que buscas.</p>
+
+      <div class="paginacion" id="paginacion" hidden>
+        <button type="button" class="boton boton--fantasma" id="anterior">Anteriores</button>
+        <span class="apunte" id="pagina-info"></span>
+        <button type="button" class="boton boton--fantasma" id="siguiente">Siguientes</button>
+      </div>
+    </section>
+
+    <p class="apunte apunte--pie">Lo que ves aquí son datos personales de ciudadanos que confiaron en la campaña. Cada consulta queda registrada con tu correo. No los compartas ni los exportes sin una razón que puedas explicar.</p>
+  </main>
+</div>
+
+<!-- Detalle de un caso -->
+<dialog class="detalle" id="detalle" aria-labelledby="d-titulo">
+  <div class="detalle__cabecera">
+    <div>
+      <h2 id="d-titulo" tabindex="-1">Caso</h2>
+      <p class="apunte" id="d-sub"></p>
+    </div>
+    <button type="button" class="boton boton--fantasma" id="d-cerrar" aria-label="Cerrar">Cerrar</button>
+  </div>
+  <div class="detalle__cuerpo">
+    <dl class="ficha" id="d-ficha"></dl>
+    <h3>Cambiar estado</h3>
+    <div class="estado-acciones" id="d-estados"></div>
+    <p class="aviso aviso--exito" id="d-exito" role="status" hidden></p>
+    <h3>Historial</h3>
+    <ol class="historial" id="d-historial"></ol>
+  </div>
+</dialog>
+
+</body>
+</html>

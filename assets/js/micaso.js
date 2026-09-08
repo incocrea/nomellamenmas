@@ -28,6 +28,7 @@
 
   let caso = null;       // lo último que devolvió el servidor
   let ocupado = false;
+  let token = '';        // enlace firmado del correo, si vino por ahí
 
   /* ---------- textos legibles ---------------------------------------------
      Las etiquetas de cada respuesta viven en el formulario de registro, que
@@ -111,7 +112,9 @@
     panelResumen.hidden = vista !== 'resumen';
     panelBorrado.hidden = vista !== 'borrado';
     confirmar.hidden = true;
-    pie.hidden = vista === 'borrado';
+    // Con enlace válido no hay nada que escribir, ni botón de consultar
+    pie.hidden = vista === 'borrado' || (vista === 'entrar' && Boolean(token));
+    panelEntrar.hidden = panelEntrar.hidden || Boolean(token);
     error.hidden = true;
     exito.hidden = true;
 
@@ -169,30 +172,46 @@
   }
 
   /* ---------- acciones ------------------------------------------------------ */
+  /* Con el enlace del correo basta el token: la función ya verificó la firma.
+     Si no, hacen falta el código y el correo. */
   function credenciales() {
+    if (token) { return { token: token }; }
     return {
       codigo: $('mc-codigo').value.trim().toUpperCase(),
       correo: $('mc-correo').value.trim().toLowerCase()
     };
   }
 
-  function consultar() {
+  function consultar(automatica) {
     limpiarErrores();
-    const cr = credenciales();
-    let mal = false;
-    if (!CODIGO_RE.test(cr.codigo)) { marcar('mc-codigo', 'El código tiene la forma NMM-XXXXXX, como te lo dimos.'); mal = true; }
-    if (!CORREO_RE.test(cr.correo)) { marcar('mc-correo', 'Revisa el formato del correo.'); mal = true; }
-    if (mal) { return; }
+    if (!token) {
+      const cr = credenciales();
+      let mal = false;
+      if (!CODIGO_RE.test(cr.codigo)) { marcar('mc-codigo', 'El código tiene la forma NMM-XXXXXX, como te lo dimos.'); mal = true; }
+      if (!CORREO_RE.test(cr.correo)) { marcar('mc-correo', 'Revisa el formato del correo.'); mal = true; }
+      if (mal) { return; }
+    }
 
     ocupar(true, 'Consultando…');
-    NMM.api.miCaso('consultar', cr).then((d) => {
+    if (automatica) { $('mc-cargando').hidden = false; }
+    NMM.api.miCaso('consultar', credenciales()).then((d) => {
       caso = d;
       pintarResumen(d);
       mostrar('resumen');
       vivo.textContent = 'Encontramos tu caso ' + d.caso.codigo;
     }).catch((e) => {
+      if (e && e.tipo === 'enlace_invalido') {
+        token = '';            // el enlace ya no sirve: que entre a mano
+        mostrar('entrar');
+        fallar('Ese enlace caducó o no es válido. Entra con tu código y tu correo, aquí abajo.');
+        return;
+      }
+      if (automatica) { token = ''; mostrar('entrar'); }
       fallar(mensajeError(e));
-    }).then(() => ocupar(false));
+    }).then(() => {
+      ocupar(false);
+      $('mc-cargando').hidden = true;
+    });
   }
 
   function guardar() {
@@ -247,13 +266,18 @@
   /* ---------- eventos -------------------------------------------------------- */
   function alAbrir() {
     caso = null;
-    // Si vienen del enlace del correo, el código ya está; falta el correo
-    const traido = NMM.casoInicial || '';
-    $('mc-codigo').value = traido;
+    token = NMM.tokenInicial || '';
+    $('mc-codigo').value = NMM.casoInicial || '';
     $('mc-correo').value = '';
     limpiarErrores();
     mostrar('entrar');
-    if (traido) {
+
+    if (token) {
+      // Vino del enlace del correo: se abre solo, sin escribir nada
+      consultar(true);
+      return;
+    }
+    if (NMM.casoInicial) {
       setTimeout(() => $('mc-correo').focus({ preventScroll: true }), 150);
     }
   }

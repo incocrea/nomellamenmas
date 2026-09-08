@@ -527,7 +527,7 @@
     const msj = document.getElementById('compartir-msj');
     const datos = {
       title: 'NO ME LLAMEN MÁS',
-      text: 'No me llames sin permiso. Si a ti también te llaman sin autorización, registra tu caso:',
+      text: 'Unidos contra el acoso comercial. Si a ti también te llaman sin autorización, registra tu caso:',
       url
     };
     if (navigator.share) {

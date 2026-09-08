@@ -162,36 +162,21 @@
   color: var(--rojo);
 }
 
-/* --- No solo nos quejamos: pilares ---------------------------------------- */
-.pilares {
-  margin-top: var(--e-6);
-  display: grid;
-  gap: var(--e-5);
-  list-style: none;
-  padding: 0;
-}
-@media (min-width: 640px) {
-  .pilares { grid-template-columns: repeat(2, 1fr); gap: var(--e-6); }
-}
-@media (min-width: 1024px) {
-  .pilares { grid-template-columns: repeat(4, 1fr); }
-}
-
-.pilar {
-  padding-top: var(--e-4);
-  border-top: 3px solid var(--tinta);
-}
-.pilar__nombre {
+/* --- No solo nos quejamos -------------------------------------------------- */
+/* Sin los cuatro pilares, la sección es un titular y una afirmación: esa
+   afirmación tiene que sostener el bloque ella sola. */
+.seccion__intro--grande {
+  margin-top: var(--e-5);
+  max-width: 30ch;
   font-family: var(--display);
-  font-weight: 800;
-  font-size: 1.3rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-weight: 700;
+  font-size: clamp(1.3rem, 4.6vw, 1.9rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
 }
-.pilar__texto {
-  margin-top: var(--e-2);
-  color: var(--tinta-suave);
-  max-width: 24rem;
+@media (min-width: 768px) {
+  .seccion__intro--grande { max-width: 34ch; }
 }
 
 /* --- ¿Qué buscamos?: los tres objetivos, en bloque oscuro ------------------ */
@@ -245,16 +230,20 @@
   max-width: 36ch;
 }
 
+/* Ocupa todo el ancho del contenedor: es el remate de la sección */
 .objetivos__cierre {
   margin-top: var(--e-7);
   padding-top: var(--e-5);
   border-top: 1px solid rgba(242, 243, 241, 0.22);
   font-family: var(--display);
   font-weight: 700;
-  font-size: clamp(1.2rem, 4vw, 1.55rem);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  max-width: 30ch;
+  font-size: clamp(1.35rem, 5vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+@media (min-width: 768px) {
+  .objetivos__cierre { text-align: center; }
 }
 .objetivos__cierre .rojo { color: var(--rojo-claro); }
 
