@@ -91,5 +91,30 @@
     });
   }
 
-  NMM.api = { registrarCaso: registrarCaso, miCaso: miCaso };
+  /* Formulario de contacto: nombre, correo y asunto. */
+  function contacto(datos) {
+    const cfg = NMM.config || {};
+    if (!cfg.apiBase) { return Promise.reject({ tipo: 'red' }); }
+    return fetch(cfg.apiBase.replace(/\/+$/, '') + '/contacto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign({ esquema: 1 }, datos)),
+      credentials: 'omit'
+    }).catch(function () {
+      throw { tipo: 'red' };
+    }).then(function (respuesta) {
+      return leerJson(respuesta).then(function (d) {
+        if (respuesta.ok) { return d || {}; }
+        switch (respuesta.status) {
+          case 400: throw { tipo: 'validacion', campos: (d && d.campos) || {} };
+          case 403: throw { tipo: 'antibot' };
+          case 429: throw { tipo: 'limite' };
+          case 503: throw { tipo: 'mantenimiento' };
+          default: throw { tipo: 'red' };
+        }
+      });
+    });
+  }
+
+  NMM.api = { registrarCaso: registrarCaso, miCaso: miCaso, contacto: contacto };
 })();

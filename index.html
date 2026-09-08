@@ -55,9 +55,9 @@
 
   <script src="assets/js/config.js?v=a1d4caf6" defer></script>
   <script src="assets/js/modal.js?v=b44ad8e0" defer></script>
-  <script src="assets/js/api.js?v=8fb0bcd9" defer></script>
-  <script src="assets/js/wizard.js?v=08adc7ec" defer></script>
-  <script src="assets/js/main.js?v=8c4c6a5c" defer></script>
+  <script src="assets/js/api.js?v=54b6837c" defer></script>
+  <script src="assets/js/wizard.js?v=85202fde" defer></script>
+  <script src="assets/js/main.js?v=3a9589b5" defer></script>
   <!-- micaso.js no se carga aquí: main.js lo pide la primera vez que alguien
        abre «Mi caso», que es una minoría de las visitas -->
 
@@ -175,7 +175,7 @@
         <li><button type="button" data-abrir-modal="mis-datos">Mis datos</button></li>
         <li><button type="button" data-abrir-modal="privacidad">Privacidad</button></li>
         <li><button type="button" data-abrir-modal="terminos">Términos</button></li>
-        <li><a href="mailto:contacto@nomellamenmas.com">Contacto</a></li>
+        <li><button type="button" data-abrir-modal="contacto">Contacto</button></li>
       </ul>
       <p class="pie__aviso"><strong>Iniciativa ciudadana independiente.</strong> No somos una entidad pública. Nunca te llamaremos ni te pediremos claves: solo te escribiremos al correo que registres.</p>
     </div>
@@ -407,6 +407,66 @@
     </div>
   </dialog>
 
+
+
+  <!-- ============================== CONTACTO ============================== -->
+
+  <dialog class="modal modal--volver" id="modal-contacto" aria-labelledby="titulo-contacto" data-mensaje-cierre="¿Cerrar? Se perderá lo que hayas escrito.">
+    <div class="modal__cabecera">
+      <div class="modal__encabezado">
+        <h2 class="modal__titulo" id="titulo-contacto" tabindex="-1">Escríbenos</h2>
+        <p class="modal__subtitulo" id="ct-subtitulo">Te respondemos al correo que nos dejes</p>
+      </div>
+      <button type="button" class="modal__cerrar" data-cerrar-modal aria-label="Cerrar">
+        <svg class="modal__equis" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>
+        <svg class="modal__volver" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+
+    <div class="modal__cuerpo">
+      <p class="visualmente-oculto" id="ct-vivo" aria-live="polite"></p>
+
+      <section id="ct-formulario">
+        <p class="paso__ayuda">Si tu mensaje es sobre tus datos personales, escríbenos desde el correo con el que registraste tu caso e indícanos tu código.</p>
+
+        <!-- Campo trampa contra robots -->
+        <input class="trampa" type="text" id="ct-web" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="campo" data-campo="ct-nombre">
+          <label class="campo__etiqueta" for="ct-nombre">Tu nombre</label>
+          <input class="entrada" id="ct-nombre" type="text" maxlength="80" autocomplete="name" required>
+          <p class="error" id="err-ct-nombre"></p>
+        </div>
+
+        <div class="campo" data-campo="ct-correo">
+          <label class="campo__etiqueta" for="ct-correo">Tu correo</label>
+          <input class="entrada" id="ct-correo" type="email" inputmode="email" maxlength="120" autocomplete="email" required>
+          <p class="error" id="err-ct-correo"></p>
+        </div>
+
+        <div class="campo" data-campo="ct-asunto">
+          <label class="campo__etiqueta" for="ct-asunto">Asunto</label>
+          <p class="campo__pista">Cuéntanos en qué te podemos ayudar.</p>
+          <textarea class="entrada entrada--area" id="ct-asunto" maxlength="1000" rows="5" data-contador="ct-contador" required></textarea>
+          <p class="contador" id="ct-contador" aria-hidden="true">0/1000</p>
+          <p class="error" id="err-ct-asunto"></p>
+        </div>
+
+        <div class="turnstile" id="caja-turnstile-contacto"></div>
+        <p class="aviso aviso--error" id="ct-error" role="alert" hidden></p>
+      </section>
+
+      <section id="ct-listo" hidden>
+        <h3 class="paso__pregunta" id="ct-listo-titulo" tabindex="-1">Mensaje enviado.</h3>
+        <p class="paso__ayuda">Gracias por escribirnos. Te responderemos al correo que nos dejaste.</p>
+        <p class="aviso aviso--info" id="ct-sin-correo" hidden>Tu mensaje quedó registrado, aunque no pudimos enviarte el aviso de confirmación. Lo vamos a leer igual.</p>
+      </section>
+    </div>
+
+    <div class="modal__pie wizard__pie wizard__pie--uno" id="ct-pie">
+      <button type="button" class="boton boton--principal" id="ct-enviar">Enviar mensaje</button>
+    </div>
+  </dialog>
 
   <!-- ============================== MI CASO ============================== -->
 

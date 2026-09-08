@@ -54,9 +54,23 @@
     });
     return cargaMiCaso;
   }
+  let cargaContacto = null;
+  function cargarContacto() {
+    if (cargaContacto) { return cargaContacto; }
+    cargaContacto = new Promise((res) => {
+      const s = document.createElement('script');
+      s.src = 'assets/js/contacto.js?v=33c32774';
+      s.async = true;
+      s.onload = res;
+      s.onerror = res;
+      document.head.appendChild(s);
+    });
+    return cargaContacto;
+  }
   document.addEventListener('click', (e) => {
-    const abre = e.target.closest && e.target.closest('[data-abrir-modal="mi-caso"]');
-    if (abre) { cargarMiCaso(); }
+    if (!e.target.closest) { return; }
+    if (e.target.closest('[data-abrir-modal="mi-caso"]')) { cargarMiCaso(); }
+    if (e.target.closest('[data-abrir-modal="contacto"]')) { cargarContacto(); }
   }, true);
 
   /* El correo de confirmación trae dos formas de volver al caso:

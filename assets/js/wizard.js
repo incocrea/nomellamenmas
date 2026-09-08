@@ -606,4 +606,7 @@
 
   actualizarContadores();
   NMM.wizard = { mostrar, recoger, normalizarTelefono };
+  // El formulario de contacto reutiliza este cargador: una sola copia del
+  // código y una sola descarga de la biblioteca de Cloudflare
+  NMM.turnstile = { cargar: cargarTurnstile, api: apiTurnstile, requerido: turnstileRequerido };
 })();
