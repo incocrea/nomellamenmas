@@ -341,13 +341,14 @@
 
 /* --- Pie ------------------------------------------------------------------- */
 .pie { padding-block: var(--e-7) calc(var(--e-8) + 56px); border-top: 1px solid var(--linea); }
-.pie__firma { width: 48px; height: 48px; margin-bottom: var(--e-5); opacity: 0.9; }
 @media (min-width: 640px) {
   .pie { padding-bottom: var(--e-8); }
 }
+.pie .contenedor { text-align: center; }
 .pie__enlaces {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0 var(--e-5);
   list-style: none;
   padding: 0;
@@ -358,17 +359,25 @@
   align-items: center;
   min-height: 44px;
   font-weight: 700;
+  text-decoration: none;
+}
+/* Sin subrayado en reposo, pero sí al pasar por encima o al llegar con el
+   teclado: el color solo no basta para saber que algo se puede pulsar. */
+.pie__enlaces button:hover,
+.pie__enlaces a:hover,
+.pie__enlaces button:focus-visible,
+.pie__enlaces a:focus-visible {
+  color: var(--rojo);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
-.pie__enlaces button:hover,
-.pie__enlaces a:hover { color: var(--rojo); }
+/* El aviso cierra la página: ancho completo y centrado, no una columna suelta */
 .pie__aviso {
   margin-top: var(--e-5);
-  max-width: var(--ancho-texto);
   color: var(--tinta-suave);
   font-size: var(--t-chico);
+  text-wrap: pretty;
 }
 .pie__aviso strong { color: var(--tinta); }
 
