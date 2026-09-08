@@ -247,10 +247,15 @@
   /* ---------- eventos -------------------------------------------------------- */
   function alAbrir() {
     caso = null;
-    $('mc-codigo').value = '';
+    // Si vienen del enlace del correo, el código ya está; falta el correo
+    const traido = NMM.casoInicial || '';
+    $('mc-codigo').value = traido;
     $('mc-correo').value = '';
     limpiarErrores();
     mostrar('entrar');
+    if (traido) {
+      setTimeout(() => $('mc-correo').focus({ preventScroll: true }), 150);
+    }
   }
 
   dialogo.addEventListener('nmm:abierto', alAbrir);

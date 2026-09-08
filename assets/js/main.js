@@ -41,16 +41,35 @@
      consulta se pide la primera vez que se pulsa el enlace. Escuchamos en fase
      de captura para adelantarnos a modal.js; si el modal alcanza a abrirse
      antes, micaso.js se pone al día solo al cargar. */
-  let pedidoMiCaso = false;
+  let cargaMiCaso = null;
+  function cargarMiCaso() {
+    if (cargaMiCaso) { return cargaMiCaso; }
+    cargaMiCaso = new Promise((res) => {
+      const s = document.createElement('script');
+      s.src = 'assets/js/micaso.js';
+      s.async = true;
+      s.onload = res;
+      s.onerror = res;
+      document.head.appendChild(s);
+    });
+    return cargaMiCaso;
+  }
   document.addEventListener('click', (e) => {
     const abre = e.target.closest && e.target.closest('[data-abrir-modal="mi-caso"]');
-    if (!abre || pedidoMiCaso) { return; }
-    pedidoMiCaso = true;
-    const s = document.createElement('script');
-    s.src = 'assets/js/micaso.js';
-    s.async = true;
-    document.head.appendChild(s);
+    if (abre) { cargarMiCaso(); }
   }, true);
+
+  /* El correo de confirmación trae un enlace con el código: nomellamenmas.com/?caso=NMM-XXXXXX
+     Abre la consulta con el código puesto. El código solo no da acceso: sigue
+     haciendo falta el correo con el que la persona se registró. */
+  const NMM = window.NMM = window.NMM || {};
+  const codigo = (new URLSearchParams(location.search).get('caso') || '').trim().toUpperCase();
+  if (/^NMM-[A-Z2-9]{6}$/.test(codigo)) {
+    NMM.casoInicial = codigo;
+    cargarMiCaso().then(() => {
+      if (NMM.modal) { NMM.modal.abrir('mi-caso'); }
+    });
+  }
 
   /* ---------- CTA fija en móvil --------------------------------------------- */
   // Aparece cuando el hero queda arriba y se oculta mientras se ve el bloque
