@@ -104,7 +104,9 @@
       new IntersectionObserver((en) => {
         cierreVisible = en[0].isIntersecting;
         actualizar();
-      }, { threshold: 0.15 }).observe(cierre);
+        // 0.35 y no 0.15: el bloque rojo creció, y con el umbral viejo la barra
+        // fija se escondía mucho antes de que el botón real entrara en pantalla
+      }, { threshold: 0.35 }).observe(cierre);
     }
   }
 })();

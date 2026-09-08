@@ -45,6 +45,8 @@ button {
 
 a { color: inherit; }
 
+::selection { background: var(--rojo); color: var(--blanco); }
+
 :focus-visible {
   outline: 3px solid var(--foco);
   outline-offset: 3px;
