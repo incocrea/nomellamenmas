@@ -61,5 +61,34 @@
     });
   }
 
-  NMM.api = { registrarCaso: registrarCaso };
+  /* «Mi caso»: consultar, actualizar o eliminar el propio reporte.
+     accion = 'consultar' | 'actualizar' | 'eliminar' */
+  function miCaso(accion, datos) {
+    const cfg = NMM.config || {};
+    if (!cfg.apiBase) { return Promise.reject({ tipo: 'red' }); }
+
+    const url = cfg.apiBase.replace(/\/+$/, '') + '/mi-caso';
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign({ esquema: 1, accion: accion }, datos)),
+      credentials: 'omit'
+    }).catch(function () {
+      throw { tipo: 'red' };
+    }).then(function (respuesta) {
+      return leerJson(respuesta).then(function (d) {
+        if (respuesta.ok) { return d || {}; }
+        switch (respuesta.status) {
+          case 400: throw { tipo: 'validacion', campos: (d && d.campos) || {} };
+          case 403: throw { tipo: 'origen' };
+          case 404: throw { tipo: 'no_encontrado' };
+          case 429: throw { tipo: 'limite' };
+          case 503: throw { tipo: 'mantenimiento' };
+          default: throw { tipo: 'red' };
+        }
+      });
+    });
+  }
+
+  NMM.api = { registrarCaso: registrarCaso, miCaso: miCaso };
 })();

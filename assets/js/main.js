@@ -36,6 +36,22 @@
     setTimeout(() => pendientes.forEach((el) => el.classList.remove('pendiente')), 4000);
   }
 
+  /* ---------- «Mi caso» se descarga cuando hace falta ------------------------
+     La mayoría de quien llega solo lee o registra su caso. El módulo de
+     consulta se pide la primera vez que se pulsa el enlace. Escuchamos en fase
+     de captura para adelantarnos a modal.js; si el modal alcanza a abrirse
+     antes, micaso.js se pone al día solo al cargar. */
+  let pedidoMiCaso = false;
+  document.addEventListener('click', (e) => {
+    const abre = e.target.closest && e.target.closest('[data-abrir-modal="mi-caso"]');
+    if (!abre || pedidoMiCaso) { return; }
+    pedidoMiCaso = true;
+    const s = document.createElement('script');
+    s.src = 'assets/js/micaso.js';
+    s.async = true;
+    document.head.appendChild(s);
+  }, true);
+
   /* ---------- CTA fija en móvil --------------------------------------------- */
   // Aparece cuando el hero queda arriba y se oculta mientras se ve el bloque
   // rojo final, que ya tiene su propio botón.

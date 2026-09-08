@@ -58,6 +58,9 @@
   <script src="assets/js/api.js" defer></script>
   <script src="assets/js/wizard.js" defer></script>
   <script src="assets/js/main.js" defer></script>
+  <!-- micaso.js no se carga aquí: main.js lo pide la primera vez que alguien
+       abre «Mi caso», que es una minoría de las visitas -->
+
 </head>
 <body>
   <a class="saltar" href="#contenido">Ir al contenido</a>
@@ -182,6 +185,7 @@
     <div class="contenedor">
       <ul class="pie__enlaces">
         <li><button type="button" data-abrir-modal="como-funciona">¿Cómo funciona?</button></li>
+        <li><button type="button" data-abrir-modal="mi-caso">Consultar mi caso</button></li>
         <li><button type="button" data-abrir-modal="mis-datos">Mis datos</button></li>
         <li><button type="button" data-abrir-modal="privacidad">Privacidad</button></li>
         <li><button type="button" data-abrir-modal="terminos">Términos</button></li>
@@ -271,7 +275,8 @@
         <p>En un proveedor tecnológico con servidores fuera de Colombia, con cifrado y controles de acceso. Lo declaramos en la <button type="button" class="enlace" data-abrir-modal="privacidad">política de privacidad</button>.</p>
 
         <h3>Tus derechos</h3>
-        <p>Conocer, actualizar, corregir, pedir prueba de la autorización, revocarla y pedir que borremos tus datos. Escríbenos a contacto@nomellamenmas.com con tu código de caso.</p>
+        <p>Conocer, actualizar, corregir, pedir prueba de la autorización, revocarla y pedir que borremos tus datos.</p>
+        <p>Puedes hacerlo tú mismo en <button type="button" class="enlace" data-abrir-modal="mi-caso">Mi caso</button>, con tu código y tu correo, o escribirnos a contacto@nomellamenmas.com.</p>
 
         <p class="destacado">Nunca te llamaremos ni te pediremos claves. Solo te escribiremos al correo que registres. Si alguien te llama en nombre de NO ME LLAMEN MÁS pidiendo datos o dinero, no somos nosotros.</p>
       </div>
@@ -349,6 +354,7 @@
         </ul>
 
         <h3>10. Cómo ejercerlos, paso a paso</h3>
+        <p>Lo más rápido es hacerlo tú mismo en <button type="button" class="enlace" data-abrir-modal="mi-caso">Mi caso</button>: con tu código y tu correo puedes ver todo lo que guardamos, corregir tus datos o eliminar tu caso al instante. También puedes escribirnos:</p>
         <ol>
           <li>Escribe a <strong>contacto@nomellamenmas.com</strong> desde el correo con el que registraste tu caso.</li>
           <li>Indica tu código de caso, tu nombre y qué quieres: conocer, actualizar, corregir, suprimir o revocar.</li>
@@ -412,6 +418,110 @@
         <h3>Contacto</h3>
         <p>contacto@nomellamenmas.com. Versión <strong>2026-09</strong>, vigente desde el 8 de septiembre de 2026.</p>
       </div>
+    </div>
+  </dialog>
+
+
+  <!-- ============================== MI CASO ============================== -->
+
+  <dialog class="modal modal--volver" id="modal-mi-caso" aria-labelledby="titulo-mi-caso" data-mensaje-cierre="¿Cerrar? Los cambios que no hayas guardado se pierden.">
+    <div class="modal__cabecera">
+      <div class="modal__encabezado">
+        <h2 class="modal__titulo" id="titulo-mi-caso" tabindex="-1">Mi caso</h2>
+        <p class="modal__subtitulo" id="mc-subtitulo">Consúltalo, actualízalo o elimínalo</p>
+      </div>
+      <button type="button" class="modal__cerrar" data-cerrar-modal aria-label="Cerrar">
+        <svg class="modal__equis" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>
+        <svg class="modal__volver" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+
+    <div class="modal__cuerpo">
+      <p class="visualmente-oculto" id="mc-vivo" aria-live="polite"></p>
+
+      <!-- Identificarse -->
+      <section id="mc-entrar">
+        <p class="paso__ayuda">Escribe el código que te dimos al registrar tu caso y el correo con el que te registraste.</p>
+
+        <div class="campo" data-campo="mc-codigo">
+          <label class="campo__etiqueta" for="mc-codigo">Código del caso</label>
+          <input class="entrada" id="mc-codigo" name="mc-codigo" type="text" maxlength="12" autocomplete="off" spellcheck="false" placeholder="NMM-XXXXXX">
+          <p class="error" id="err-mc-codigo"></p>
+        </div>
+
+        <div class="campo" data-campo="mc-correo">
+          <label class="campo__etiqueta" for="mc-correo">Correo con el que te registraste</label>
+          <input class="entrada" id="mc-correo" name="mc-correo" type="email" inputmode="email" autocomplete="email" maxlength="120">
+          <p class="error" id="err-mc-correo"></p>
+        </div>
+
+        <p class="aviso aviso--info">¿Perdiste el código? Escríbenos a <a href="mailto:contacto@nomellamenmas.com">contacto@nomellamenmas.com</a> desde ese mismo correo y te ayudamos.</p>
+      </section>
+
+      <!-- Resumen del caso -->
+      <section id="mc-resumen" hidden>
+        <dl class="resumen" id="mc-datos"></dl>
+
+        <h4 class="fin-sub">Tus datos de contacto</h4>
+        <p class="paso__ayuda">Puedes corregirlos cuando quieras. El correo no se cambia aquí: escríbenos si necesitas cambiarlo.</p>
+
+        <div class="campo" data-campo="mc-nombre">
+          <label class="campo__etiqueta" for="mc-nombre">Nombre o seudónimo <span class="campo__opcional">(opcional)</span></label>
+          <input class="entrada" id="mc-nombre" type="text" maxlength="80" autocomplete="name">
+          <p class="error" id="err-mc-nombre"></p>
+        </div>
+
+        <div class="campo" data-campo="mc-telefono">
+          <label class="campo__etiqueta" for="mc-telefono">Teléfono al que te llaman <span class="campo__opcional">(opcional)</span></label>
+          <input class="entrada" id="mc-telefono" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="310 123 4567">
+          <p class="error" id="err-mc-telefono"></p>
+        </div>
+
+        <div class="campo" data-campo="mc-ubicacion">
+          <label class="campo__etiqueta" for="mc-ubicacion">Ciudad <span class="campo__opcional">(opcional)</span></label>
+          <input class="entrada" id="mc-ubicacion" type="text" maxlength="90" list="ciudades" autocomplete="address-level2" placeholder="Por ejemplo: Medellín, Antioquia">
+          <p class="error" id="err-mc-ubicacion"></p>
+        </div>
+
+        <div class="campo" data-campo="mc-relato">
+          <label class="campo__etiqueta" for="mc-relato">Lo que nos contaste <span class="campo__opcional">(opcional)</span></label>
+          <textarea class="entrada entrada--area" id="mc-relato" maxlength="500" rows="4" data-contador="mc-contador"></textarea>
+          <p class="contador" id="mc-contador" aria-hidden="true">0/500</p>
+          <p class="error" id="err-mc-relato"></p>
+        </div>
+
+        <label class="casilla-legal">
+          <input type="checkbox" id="mc-novedades">
+          <span>Quiero recibir novedades de la campaña por correo.</span>
+        </label>
+
+        <h4 class="fin-sub">Eliminar mi caso</h4>
+        <p class="paso__ayuda">Borra tu reporte y todos tus datos personales. No se puede deshacer y tu caso deja de contar para la campaña.</p>
+        <div class="intro-acciones">
+          <button type="button" class="boton boton--secundario" id="mc-pedir-borrar">Quiero eliminar mi caso</button>
+        </div>
+
+        <div class="aviso aviso--error" id="mc-confirmar-borrar" hidden>
+          <p><strong>¿Seguro?</strong> Se borrarán tu reporte, tu correo y tu teléfono. Guardaremos solo la constancia de que atendimos tu solicitud, sin datos que te identifiquen.</p>
+          <div class="intro-acciones">
+            <button type="button" class="boton boton--principal" id="mc-borrar">Sí, eliminar definitivamente</button>
+            <button type="button" class="boton boton--secundario" id="mc-cancelar-borrar">Mejor no</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Confirmación de borrado -->
+      <section id="mc-borrado" hidden>
+        <h3 class="paso__pregunta" tabindex="-1" id="mc-borrado-titulo">Tu caso fue eliminado.</h3>
+        <p class="paso__ayuda">Borramos tu reporte y tus datos de contacto. Si vuelves a recibir llamadas y quieres contarlo, puedes registrar un caso nuevo cuando quieras.</p>
+      </section>
+
+      <p class="aviso aviso--error" id="mc-error" role="alert" hidden></p>
+      <p class="aviso aviso--exito" id="mc-exito" role="status" hidden></p>
+    </div>
+
+    <div class="modal__pie wizard__pie wizard__pie--uno" id="mc-pie">
+      <button type="button" class="boton boton--principal" id="mc-accion">Consultar mi caso</button>
     </div>
   </dialog>
 
@@ -671,6 +781,7 @@
             <li>Revisamos tu caso y lo sumamos a los demás.</li>
             <li>Si la iniciativa avanza hacia acciones legales, te escribiremos para preguntarte si quieres participar y aportar más detalles.</li>
             <li>Cuando haya novedades sobre la iniciativa, te avisamos al correo.</li>
+            <li>Con tu código y tu correo puedes <button type="button" class="enlace" data-abrir-modal="mi-caso">consultar, actualizar o eliminar tu caso</button> cuando quieras.</li>
           </ol>
           <p class="paso__ayuda">Recuerda: nunca te llamaremos ni te pediremos claves.</p>
           <div class="intro-acciones">

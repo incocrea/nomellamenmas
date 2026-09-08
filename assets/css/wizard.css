@@ -310,3 +310,34 @@
 }
 
 .datalista-nota { font-size: var(--t-chico); color: var(--tinta-suave); margin-top: var(--e-2); }
+
+/* --- Resumen del caso en «Mi caso» -------------------------------------------- */
+.resumen {
+  margin: 0 0 var(--e-5);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+@media (min-width: 560px) {
+  .resumen { grid-template-columns: 13rem 1fr; }
+}
+.resumen dt {
+  font-weight: 700;
+  font-size: var(--t-chico);
+  color: var(--tinta-suave);
+  padding-top: var(--e-3);
+}
+.resumen dd {
+  margin: 0;
+  padding-bottom: var(--e-3);
+  border-bottom: 1px solid var(--linea);
+  line-height: 1.4;
+}
+@media (min-width: 560px) {
+  .resumen dt { padding-bottom: var(--e-3); border-bottom: 1px solid var(--linea); }
+}
+.resumen dd:last-of-type,
+.resumen dt:last-of-type { border-bottom: 0; }
+
+#mc-confirmar-borrar p { margin-bottom: var(--e-3); }
+#mc-confirmar-borrar .intro-acciones { margin-top: var(--e-3); }
