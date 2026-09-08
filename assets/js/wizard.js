@@ -345,7 +345,7 @@
     cargaCiudades = new Promise((res) => {
       if (NMM.ciudades) { res(); return; }
       const s = document.createElement('script');
-      s.src = 'assets/js/ciudades.js';
+      s.src = 'assets/js/ciudades.js?v=2e800e51';
       s.async = true;
       s.onload = res;
       s.onerror = res;   // sin lista, el campo sigue siendo de texto libre

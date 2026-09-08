@@ -46,7 +46,7 @@
     if (cargaMiCaso) { return cargaMiCaso; }
     cargaMiCaso = new Promise((res) => {
       const s = document.createElement('script');
-      s.src = 'assets/js/micaso.js';
+      s.src = 'assets/js/micaso.js?v=f6abcd98';
       s.async = true;
       s.onload = res;
       s.onerror = res;
